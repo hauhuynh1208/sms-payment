@@ -14,7 +14,7 @@ a.button .md-icon {
 .btn-primary {
   color: white !important;
   background-image: none;
-  background-color: var(--primary-color);
+  background-color: var(--primary-color) !important;
   border: 0;
 }
 
