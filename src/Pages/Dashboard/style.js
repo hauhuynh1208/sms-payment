@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
-import colors from '../../util/colors'
+import colors from '../../styles/colors'
 
 const styles = makeStyles((theme) => ({ 
     root__dashboard:{

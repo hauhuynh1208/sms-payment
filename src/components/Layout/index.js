@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTheme } from '@material-ui/core/styles'
+import clsx from 'clsx'
 import {
     Box,
     Typography,
@@ -7,23 +7,17 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
-    Link
+    // Link,
   } from '@material-ui/core'
+import {Link} from 'react-router-dom'
 import {AcUnit, Dashboard, Email, AccountTree, Info, Settings} from '@material-ui/icons';
 import useStyles from './style'
-import colors from '../../util/colors'
+import colors from '../../styles/colors'
 
 const Layout = props =>{
-
-
     const [selectedIndex, setSelectedIndex] = React.useState(0);
-
-    const handleListItemClick = (event, index) => {
-        setSelectedIndex(index);
-    };
-
-    const theme = useTheme()
     const classes  = useStyles()
+    console.log(selectedIndex)
     return(
         <div className={classes.root}>
             <Box minWidth={260}>
@@ -50,10 +44,10 @@ const Layout = props =>{
                         <Box className={classes.divider_horizontal}/>
 
                         <List component="nav" aria-label="main mailbox folders" >
-                            <Link href="/" className={classes.link__hover} >
+                            <Link to='/' className={clsx(classes.link, classes.link__hover)} >
                              <ListItem button 
                                 selected={selectedIndex === 0}
-                                onClick={(event) => handleListItemClick(event, 0)}
+                                onClick={() => setSelectedIndex(0)}
                                 style={{ color: selectedIndex === 0 ? classes.item__select : ''}}
                                 >
                                     <ListItemIcon>
@@ -61,13 +55,11 @@ const Layout = props =>{
                                     </ListItemIcon>
                                     <ListItemText primary="Dashboard" style={{ color: colors.white }}/>
                                 </ListItem>
-                          
                               </Link>
-                              <Link href="sms" className={classes.link__hover}>
+                              <Link to="/sms" className={clsx(classes.link, classes.link__hover)}>
                                 <ListItem button
                                     selected={selectedIndex === 1}
-                                    selectedColor="red"
-                                    onClick={(event) => handleListItemClick(event, 1)}
+                                    onClick={() => setSelectedIndex(1)}
                                 >
                                     <ListItemIcon>
                                         <Email className={classes.icon__feature}/>
@@ -75,10 +67,10 @@ const Layout = props =>{
                                     <ListItemText primary="SMS" style={{ color: colors.white }}/>
                                 </ListItem>
                              </Link>
-                             <Link href="/account" className={classes.link__hover}v>
+                             <Link to="/account" className={clsx(classes.link, classes.link__hover)}>
                                 <ListItem button
                                     selected={selectedIndex === 2}
-                                    onClick={(event) => handleListItemClick(event, 2)}
+                                    onClick={() => setSelectedIndex(2)}
                                 >
                                     <ListItemIcon>
                                         <AccountTree className={classes.icon__feature}/>
@@ -86,10 +78,10 @@ const Layout = props =>{
                                     <ListItemText primary="Account" style={{ color: colors.white }}/>
                                 </ListItem>
                             </Link>
-                            <Link href="/about" className={classes.link__hover}>
+                            <Link to="/about" className={clsx(classes.link, classes.link__hover)}>
                                 <ListItem button
                                     selected={selectedIndex === 3}
-                                    onClick={(event) => handleListItemClick(event, 3)}
+                                    onClick={() => setSelectedIndex(3)}
                                 >
                                     <ListItemIcon>
                                         <Info className={classes.icon__feature}/>
@@ -97,10 +89,10 @@ const Layout = props =>{
                                     <ListItemText primary="About" style={{ color: colors.white }}/>
                                 </ListItem>
                             </Link>
-                            <Link href="/setting" className={classes.link__hover}>
+                            <Link to="/setting" className={clsx(classes.link, classes.link__hover)}>
                                 <ListItem button
                                     selected={selectedIndex === 4}
-                                    onClick={(event) => handleListItemClick(event, 4)}
+                                    onClick={() => setSelectedIndex(4)}
                                 >
                                     <ListItemIcon>
                                         <Settings className={classes.icon__feature}/>

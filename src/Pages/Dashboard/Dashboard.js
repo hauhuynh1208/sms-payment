@@ -22,7 +22,7 @@ import { useTheme } from '@material-ui/core/styles'
 import styles from './style'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
-import colors from '../../util/colors'
+import colors from '../../styles/colors'
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 

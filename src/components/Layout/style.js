@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core'
-import colors from '../../util/colors'
+import colors from '../../styles/colors'
 
 export default makeStyles((theme) => ({ 
     //Body
@@ -73,6 +73,9 @@ export default makeStyles((theme) => ({
      item__select:{
         backgroundColor: colors.primary,
         borderRadius: 5,
+     },
+     link: {
+         textDecoration: 'none'
      },
      link__hover:{
          
