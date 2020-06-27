@@ -22,7 +22,7 @@ function login({email, password}) {
                     type: actionConstants.LOGIN_SUCCESS,
                     data: resp
                 })
-                dispatch({type: actionConstants.END_QUERY})
+                return dispatch({type: actionConstants.END_QUERY})
             }).then(()=>history.push('/'))
             .catch(err=>{
                 dispatch({
