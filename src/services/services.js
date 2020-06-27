@@ -62,7 +62,7 @@ async function putSMSDetail(id){
 async function getAccount(){
     try{
         let queryUrl = `${API_URL}/account/info`     
-        let data = await axios.get(queryUrl);  
+        let data = await axios.get(queryUrl, headers);  
        return data
     }
     catch(error){
