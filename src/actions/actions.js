@@ -22,7 +22,6 @@ function getSMSActionAll(){
         dispatch({type: actionTypes.START_QUERY});
         services.getSMS()
         .then(res => {
-            console.log(res.data)
             dispatch({
                 type: actionTypes.END_QUERY
             });
@@ -49,7 +48,6 @@ function getSMSActionDetail(id){
         dispatch({type: actionTypes.START_QUERY});
         services.getSMSDetail(id)
         .then(res => {
-            console.log(res.data)
             dispatch({
                 type: actionTypes.END_QUERY
             });
@@ -77,7 +75,6 @@ function putSMSAction(id){
         dispatch({type: actionTypes.START_QUERY});
         services.putSMSDetail(id)
         .then(res => {
-            console.log(res.data)
             dispatch({
                 type: actionTypes.END_QUERY
             });
@@ -107,7 +104,6 @@ function getAccountAction(){
         dispatch({type: actionTypes.START_QUERY});
         services.getAccount()
         .then(res => {
-            console.log(res.data)
             dispatch({
                 type: actionTypes.END_QUERY
             });
@@ -135,7 +131,6 @@ function postAccountAction(){
         dispatch({type: actionTypes.START_QUERY});
         services.postAccountDetail()
         .then(res => {
-            console.log(res.data)
             dispatch({
                 type: actionTypes.END_QUERY
             });
@@ -163,7 +158,6 @@ function putAccountAction(id){
         dispatch({type: actionTypes.START_QUERY});
         services.putAccountDetail(id)
         .then(res => {
-            console.log(res.data)
             dispatch({
                 type: actionTypes.END_QUERY
             });
@@ -190,7 +184,6 @@ function delAccountAction(id){
         dispatch({type: actionTypes.START_QUERY});
         services.delAccountDetail(id)
         .then(res => {
-            console.log(res.data)
             dispatch({
                 type: actionTypes.END_QUERY
             });
@@ -218,15 +211,15 @@ function delAccountAction(id){
 
 function getReportAction(){
     return(dispatch, getState) => {
+        console.log('davo get report action')
         dispatch({type: actionTypes.START_QUERY});
         services.getReport()
         .then(res => {
-            console.log(res.data)
             dispatch({
                 type: actionTypes.END_QUERY
             });
             return dispatch({
-                type: actionTypes.GET_SUCCESS_DASHBOARD,
+                type: actionTypes.GET_SUCCESS_REPORT,
                 data: res.data,
                 
             
@@ -237,7 +230,7 @@ function getReportAction(){
                 type: actionTypes.END_QUERY,
             });
             return dispatch({
-                type: actionTypes. GET_FAILURE_DASHBOARD,
+                type: actionTypes. GET_FAILURE_REPORT,
                 data: error.message,            
             })
         })

@@ -1,5 +1,4 @@
 import React from 'react'
-import { useTheme } from '@material-ui/core/styles'
 import {
     Box,
     Typography,
@@ -7,13 +6,11 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
-    Link
   } from '@material-ui/core'
 import {AcUnit, Dashboard, Email, AccountTree, Info, Settings} from '@material-ui/icons';
 import useStyles from './style'
 import colors from '../../util/colors'
 import { NavLink } from 'react-router-dom'
-
 
 var x = 0;
 const Layout = props =>{
@@ -34,14 +31,15 @@ const Layout = props =>{
                     //     : `url(${activity1})`,
                     // }} 
                     style={{
-                        backgroundImage: `url(${'https://www.luavietours.com/datafiles/galagy/15374395734631_tour_nam_du_2-ngayjpg.jpg'})`
+                        backgroundImage: `url(${'https://chothuexe7cho.com/wp-content/uploads/2016/03/cho-thue-xe-7-cho-di-bien-thien-cam-gia-re33.jpg'})`
                     }}
                 >
                     <Box className={classes.mask__image}></Box>
                     <Box className={classes.container}>
-                    
                         <Box py={3} display="flex" flexDirection="column" justifyContent="center" alignItems="center" alignContent="center">
+                           <NavLink to="/" exact onClick={(event) => handleListItemClick(event, 0)}>
                             <AcUnit style={{ fontSize: 56 }} className={classes.icon__feature}/>
+                            </NavLink>
                             <Typography variant="h5" style={{color: colors.white}}>
                                 Payment Service
                             </Typography>

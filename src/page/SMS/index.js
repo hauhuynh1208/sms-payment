@@ -1,18 +1,11 @@
 import React from 'react'
-import {
-    Box,
-  } from '@material-ui/core'
 import Layout from '../../components/Layout'
 import MaterialTable from 'material-table';
-import {connect } from 'react-redux'
-// import {actions} from '../../actions'
-import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux'
+import { actions } from '../../actions/actions'
 import axios from 'axios'
 
 import SMSComponent from './SMSComponent' 
-
-
-
 
 const data =  [
     {
@@ -75,19 +68,14 @@ class SMS extends React.Component {
    }
 
    componentDidMount(){
-  
-    axios .get('http://150.95.108.49/api/sms?_sort=-createdAt,-amount&_limit=3&_skip=0')
-    .then(res => {
-        console.log(res.data, 'data')
-    })
+       this.props.getSMSActionAll();
    }
    render(){
        const {sms} = this.props;
         return(
             <Layout>
                <SMSComponent smsData={data}/>
-            </Layout> 
-            
+            </Layout>     
         )
     }   
 }
@@ -99,4 +87,4 @@ function mapStateToProps(state) {
   }
   
 
-export default connect(mapStateToProps, null)(SMS)
+export default connect(mapStateToProps, actions)(SMS)

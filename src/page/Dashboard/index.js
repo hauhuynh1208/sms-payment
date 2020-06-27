@@ -2,6 +2,9 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import DashboardComponent from './DashboardComponent'
 import axios from 'axios'
+import {actions} from '../../actions/actions'
+import { connect } from 'react-redux'
+import { helpers } from 'chart.js'
 
 const circle = [
     {
@@ -39,6 +42,7 @@ function getObj(obj,keys){
     } 
 }
 
+
 class Dashboard extends React.Component {
     constructor(props){
         super(props)
@@ -47,10 +51,21 @@ class Dashboard extends React.Component {
             keysObj: [],
             dataLine: [],
         }
+        
+     
     } 
 
     componentDidMount(){
+        this.props.getReportAction();
+        this.convertChart(); 
+    }
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     console.log(nextProps, 'console nextProps')
+       
+    // }
 
+
+    convertChart= () => {
         const arrCircle = []
         var keys = []
         var arrLine = []
@@ -77,11 +92,11 @@ class Dashboard extends React.Component {
             dataLine: arrLine
         })
 
-
-        // axios.get("http://150.95.108.49/api/sms?_sort=-createdAt,-amount&_limit=3&_skip=0")
-        // .then(res => console.log(res.data))
     }
     render(){
+        // const {report} = this.props
+        // console.log(report.data.circle, 'report')
+        
         return(
             <Layout>
                 <DashboardComponent dataCircle ={this.state.dataCircle} dataLine={this.state.dataLine} />
@@ -90,6 +105,14 @@ class Dashboard extends React.Component {
     }
    
 }
-export default Dashboard
+
+function mapStateToProps(state) {
+    return {
+        report: state.report
+    };
+  }
+  
+
+export default connect(mapStateToProps, actions)(Dashboard)
 
 

@@ -29,29 +29,12 @@ export default makeStyles((theme) => ({
      },
      //Body container
      container:{
-       // width: theme.spacing(32.5),
-        //height: '100vh',
         position: 'relative',
         padding: theme.spacing(2),
         zIndex: 1000
          
      },
-    //  item__menu:{
-    //      width: theme.spacing(25),
-    //      "&& :hover":{
-    //         backgroundColor: colors.primary,
-    //         borderRadius: 5,
-            
-    //      },
-    //      ' .MuiListItem-root > .Mui-selected' :{
-    //          backgroundColor: 'red'
-    //      },
-    //     //  "&& :active":{
-    //     //     backgroundColor: colors.primary,
-    //     //     borderRadius: 5,
-    //     //     paddingRight: theme.spacing(1)
-    //     //  }
-    //  },
+     //item menu
      icon__feature:{
          color: colors.white,
          marginRight: theme.spacing(1)
@@ -69,17 +52,13 @@ export default makeStyles((theme) => ({
          background: colors.white,
          margin: '16px 0px',
      },
-
-     item__select:{
-        backgroundColor: colors.primary,
-        borderRadius: 5,
-     },
+     //hover
      link__hover:{
          textDecoration: 'none',
          '&& :hover':{
             backgroundColor: 'black !important',
             borderRadius: '5px !important',
-            paddingRight: 5,
+            // paddingRight: 5,
             opacity: 0.5,
             
         }

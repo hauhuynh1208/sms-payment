@@ -1,10 +1,8 @@
 import React from 'react'
-import {
-    Box
-  } from '@material-ui/core'
 import Layout from '../../components/Layout'
 import AccountComponent from './AccountComponent'
-
+import { actions } from '../../actions/actions'
+import { connect } from 'react-redux'
 
 const dataAccount = [{
     "_id": "5ef3386b503af67872e470ca",
@@ -20,6 +18,13 @@ const dataAccount = [{
     "__v": 0
 }]
 class Account extends React.Component {
+
+    componentDidMount(){
+        this.props.getAccountAction();
+    }
+
+
+
      render(){
         return(
            <Layout>
@@ -29,4 +34,11 @@ class Account extends React.Component {
     
     }
 }
-export default Account
+
+function mapStateToProps(state){
+    return{
+        account : state.account,
+    }
+}
+
+export default connect(mapStateToProps, actions)(Account)

@@ -1,10 +1,6 @@
 import React from 'react'
-import {
-    Box
-  } from '@material-ui/core'
-import Layout from '../../components/Layout'
+import { Box } from '@material-ui/core'
 import MaterialTable from 'material-table';
-
 
 const AccountComponent = props => {
     const { dataAccount } = props

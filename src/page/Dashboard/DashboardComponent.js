@@ -1,5 +1,4 @@
 import React from 'react'
-import Layout from '../../components/Layout'
 import CanvasJSReact from '../../assets/canvasjs.react';
 import {
     Box,
@@ -21,6 +20,7 @@ import {
 import { useTheme } from '@material-ui/core/styles'
 import styles from './style'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+
 
 import colors from '../../util/colors'
 
@@ -68,7 +68,7 @@ const DashboardComponent = props => {
 			animationEnabled: true,
 			title: {
 				// text: "Customer Satisfaction"
-			},
+            },
 			subtitles: [{
 				text: "Banking",
 				verticalAlign: "center",
@@ -132,7 +132,7 @@ const DashboardComponent = props => {
                             <MenuItem value="">
                                 <em>None</em>
                             </MenuItem>
-                            <MenuItem value={10}>Hiển thị theo tuần này</MenuItem>
+                            <MenuItem value={10} >Hiển thị theo tuần này</MenuItem>
                             <MenuItem value={20}>Hiển thị theo tháng này</MenuItem>
                             <MenuItem value={30}>Hiển thị theo tháng trước</MenuItem>
                             </Select>
@@ -143,12 +143,15 @@ const DashboardComponent = props => {
                         <Box width="35%">
                             <CanvasJSChart options = {options1} 
                                 // onRef={ref => this.chart = ref} 
+                                className={classes.chart__point}
                             />
+                            <Box className={classes.mask__trialVersion}></Box>
                         </Box>
                         <Box width="60%" > 
                             <CanvasJSChart options = {options2} 
                                 /* onRef={ref => this.chart = ref} */
                             />
+                            <Box className={classes.mask__trialVersion}></Box>
                         </Box>
                     </Box>
                    
