@@ -15,16 +15,16 @@ function login({email, password}) {
               password,
             },
           };
-        await post('login', params)
-            .then(resp=>{
-                sessionStorage.setItem('userInfo', JSON.stringify(resp));
+        await post('login', params).then(resp=>{
+                sessionStorage.setItem('userInfo', JSON.stringify(resp.data));
                 dispatch({
                     type: actionConstants.LOGIN_SUCCESS,
-                    data: resp
+                    data: resp.data
                 })
-                return dispatch({type: actionConstants.END_QUERY})
+                dispatch({type: actionConstants.END_QUERY})
             }).then(()=>history.push('/'))
             .catch(err=>{
+                console.log(err)
                 dispatch({
                     type: actionConstants.LOGIN_FAILURE,
                     data: err.message

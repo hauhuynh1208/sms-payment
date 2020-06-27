@@ -54,7 +54,7 @@ export async function post(url, params) {
       method: 'post',
       url: `${URL}/${url}`,
       headers,
-      withCredentials: true,
+      // withCredentials: true,
       data,
     };
 
@@ -142,7 +142,7 @@ export async function _delete(url, params) {
 async function _results(params) {
   try {
     const resp = await axios(params);
-    if (resp.status == 200 || resp.status == 201) {
+    if (resp.status === 200 || resp.status === 201) {
       if (resp.data.error) throw resp.data.message;
       return resp.data;
     }
