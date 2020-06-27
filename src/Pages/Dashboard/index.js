@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../../components/Layout'
-import DashboardComponent from './DashboardComponent'
-import {reportAction} from '../../actions/reportAction'
+import DashboardPage from './DashboardPage'
+import { reportActions } from '../../actions/reportActions'
 import { connect } from 'react-redux'
 import { helpers } from 'chart.js'
 import { bindActionCreators } from 'redux';
@@ -52,50 +52,72 @@ class Dashboard extends React.Component {
             keysObj: [],
             dataLine: {},
             report: [],
-            circle: [],
-            line: []
         }
         
      
     } 
 
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     if(nextProps.report.data){
-    //         console.log(nextProps.report.data, 'data')
-    //         // return{
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.report.data){
+            if(nextProps.report.data){
+                console.log(nextProps.report.data.line, 'data')
+                 return{
+                    report: nextProps.report.data,  
+                    dataCircle: nextProps.report.data.circle,    
+                    dataLine: nextProps.report.data.line,
+                }
+            }
             
-    //         //     report: nextProps.report.data,  
-    //         //     dataCircle: nextProps.report.data.circle,
-    //         //     dataLine: nextProps.report.data.line,
-    //         // }
-    //     }
-
-    //     // if(nextProps.report.data){
-    //     //     console.log('circle')
-    //     //     return{
-    //     //         dataCircle: nextProps.report.data.circle,
-    //     //     }
-    //     // }
-    //     // if(nextProps.report.data){
-    //     //     console.log('line')
-    //     //     return{
-    //     //         dataLine: nextProps.report.data.line,
-    //     //     }
-    //     // }
-       
-    // }
-    componentDidMount(){
-        this.props.reportAction.getReportAction();
-        // this.convertChart(); 
+        }   
     }
-  
+
+    componentDidMount(){
+        this.props.reportActions.getReportAction();
+       
+    }
 
 
-    convertChart= () => {
+
+
+
+    // convertChart = () => {
+    //     const {dataCircle, dataLine} = this.state
+
+
+    //     console.log(dataCircle, "data circle")
+    //     console.log(dataLine, "data line")
+    //     const arrCircle = []
+    //     var keys = []
+    //     var arrLine = []
+
+
+    //     //convert circle
+    //     {dataCircle.map((item, idx) => {    
+    //         arrCircle.push({name: item.name, y : item.percent})
+    //     })}
+    //     this.setState({
+    //         circle: arrCircle
+    //     })
+
+
+    //     //convert line
+    //     getObj(dataLine,keys)  
+    //     {keys.map((itemKey,idx) => {
+    //         for( idx; idx < keys.length; ){
+    //             arrLine.push({x : new Date(itemKey), y : dataLine[itemKey]});
+    //             break;
+    //         }
+    //     })}
+    //     this.setState({
+    //         line: arrLine
+    //     })
+    
+
+    // }
+    render(){
         const {dataCircle, dataLine} = this.state
-        console.log(dataCircle, "data circle")
-        console.log(dataLine, "data line")
-        const arrCircle = []
+
+        var arrCircle = []
         var keys = []
         var arrLine = []
 
@@ -104,33 +126,24 @@ class Dashboard extends React.Component {
         {dataCircle.map((item, idx) => {    
             arrCircle.push({name: item.name, y : item.percent})
         })}
-        this.setState({
-            circle: arrCircle
-        })
-
-
-        //convert line
-        // getObj(dataLine,keys)  
-        // {keys.map((itemKey,idx) => {
-        //     for( idx; idx < keys.length; ){
-        //         arrLine.push({x : new Date(itemKey), y : dataLine[itemKey]});
-        //         break;
-        //     }
-        // })}
-        // this.setState({
-        //     line: arrLine
-        // })
-
-    }
-    render(){
-        const {circle, line} = this.state
-        const {report} = this.props
-        console.log(report ,"circle and line")
-        
-        return(
+        var stringDate = ""
+        var stringMonth = ""
+        var stringAll = ""
+         //convert line
+        getObj(dataLine,keys)  
+            {keys.map((itemKey,idx) => {
+                stringDate = itemKey.slice(0,2);
+                stringMonth = itemKey.slice(3,5);
+                stringAll = stringMonth + '/' + stringDate
+                for( idx; idx < keys.length; ){
+                    arrLine.push({x : new Date(stringAll), y : dataLine[itemKey]});
+                    break;
+            }
+        })}    
+         return(
             <Layout>
-                <DashboardComponent 
-                // dataCircle ={this.state.dataCircle} dataLine={this.state.dataLine} 
+                <DashboardPage 
+                dataCircle ={arrCircle} dataLine={arrLine} 
                 />
             </Layout>
         )
@@ -146,8 +159,8 @@ function mapStateToProps(state) {
   
 function mapDispatchToProps(dispatch){
 return{
-    reportAction: bindActionCreators(
-        Object.assign({},reportAction),
+    reportActions: bindActionCreators(
+        Object.assign({},reportActions),
         dispatch
     ),
 }

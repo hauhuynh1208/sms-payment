@@ -1,7 +1,7 @@
 import React from 'react'
 import Layout from '../../components/Layout'
-import AccountComponent from './AccountComponent'
-import getAccountAction from '../../actions/accountActions'
+import AccountPage from './AccountPage'
+import { accountUserActions } from '../../actions/accountUserActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 
@@ -16,16 +16,18 @@ class Account extends React.Component {
 
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        if(nextProps.account.data){
+        if(nextProps.accountUser.data){
+            console.log(nextProps.accountUser.data, 'data')
             var arr = []
-            arr.push(nextProps.account.data)
+            arr.push(nextProps.accountUser.data)
+            console.log(arr, 'arr')
            return{
              account: arr
            }
         }  
     }
     componentDidMount(){
-        this.props.getAccountAction();
+        this.props.accountUserActions.getAccountAction();
      
         
     }
@@ -33,7 +35,7 @@ class Account extends React.Component {
         const { account } = this.state
         return(
            <Layout>
-               <AccountComponent dataAccount={account}/>
+               <AccountPage dataAccount={account}/>
            </Layout>
         )
     
@@ -42,14 +44,14 @@ class Account extends React.Component {
 
 function mapStateToProps(state){
     return{
-        account : state.account,
+        accountUser : state.accountUser,
     }
 }
 
 function mapDispatchToProps(dispatch){
     return{
-        getAccountAction: bindActionCreators(
-            Object.assign({},getAccountAction),
+        accountUserActions: bindActionCreators(
+            Object.assign({},accountUserActions),
             dispatch
         ),
     }

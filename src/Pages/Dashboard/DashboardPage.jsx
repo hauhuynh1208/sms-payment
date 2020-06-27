@@ -59,7 +59,7 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 
 
-const DashboardComponent = props => {
+const DashboardPage = props => {
     
        const {dataCircle, dataLine} = props
 
@@ -185,6 +185,6 @@ const DashboardComponent = props => {
         )
     
 }
-export default DashboardComponent
+export default DashboardPage
 
 

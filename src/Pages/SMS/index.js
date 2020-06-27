@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import {smsActions} from '../../actions/smsActions'
 import { bindActionCreators } from 'redux';
 
-import SMSComponent from './SMSComponent' 
+import SMSComponent from './SMSPage' 
 
 
 class SMS extends React.Component {
@@ -17,13 +17,13 @@ class SMS extends React.Component {
        
    }
   
-//    static getDerivedStateFromProps(nextProps, prevState) {
-//         if(nextProps.sms.data){  
-//             return{
-//                 sms: nextProps.sms.data
-//             }
-//         }  
-//     }
+   static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.sms.data){  
+            return{
+                sms: nextProps.sms.data
+            }
+        }  
+    }
 
    componentDidMount(){
        this.props.smsActions.getSMSActionAll();
@@ -31,8 +31,8 @@ class SMS extends React.Component {
 
 
    render(){
-        const { sms } = this.props
-        console.log(sms)
+        const { sms } = this.state
+        console.log(sms, 'sms')
         return(
             <Layout>
                <SMSComponent smsData={sms}/>

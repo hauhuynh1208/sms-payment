@@ -4,7 +4,7 @@ import {
   } from '@material-ui/core'
 import MaterialTable from 'material-table';
 
-const SMSComponent = props => {
+const SMSPage = props => {
     const { smsData } = props
 
     const [state, setState] = React.useState({
@@ -73,4 +73,4 @@ const SMSComponent = props => {
     
 }
 
-export default SMSComponent
+export default SMSPage

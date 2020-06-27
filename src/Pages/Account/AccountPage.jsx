@@ -2,7 +2,7 @@ import React from 'react'
 import { Box } from '@material-ui/core'
 import MaterialTable from 'material-table';
 
-const AccountComponent = props => {
+const AccountPage = props => {
     const { dataAccount } = props
     const [state, setState] = React.useState({
         columns: [
@@ -13,7 +13,6 @@ const AccountComponent = props => {
           { title: 'Address', field: 'address' },
             
         ],
-        data: dataAccount
       });
     
         return(
@@ -21,7 +20,7 @@ const AccountComponent = props => {
                     <MaterialTable
                             title="Manager Account"
                             columns={state.columns}
-                            data={state.data}
+                            data={dataAccount}
                             editable={{
                                 onRowAdd: (newData) =>
                                 new Promise((resolve) => {
@@ -65,4 +64,4 @@ const AccountComponent = props => {
         )
     
 }
-export default AccountComponent
+export default AccountPage

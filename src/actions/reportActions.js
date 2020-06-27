@@ -11,7 +11,7 @@ const headers = { headers: {
 
 
 
-export const reportAction =  {
+export const reportActions =  {
     getReportAction
 } 
 
