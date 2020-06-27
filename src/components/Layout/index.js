@@ -12,17 +12,17 @@ import {
 import {AcUnit, Dashboard, Email, AccountTree, Info, Settings} from '@material-ui/icons';
 import useStyles from './style'
 import colors from '../../util/colors'
+import { NavLink } from 'react-router-dom'
 
+
+var x = 0;
 const Layout = props =>{
-
-
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
-
+    const [selectedIndex, setSelectedIndex] = React.useState(x);
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index);
+        x = index;
     };
 
-    const theme = useTheme()
     const classes  = useStyles()
     return(
         <div className={classes.root}>
@@ -50,46 +50,40 @@ const Layout = props =>{
                         <Box className={classes.divider_horizontal}/>
 
                         <List component="nav" aria-label="main mailbox folders" >
-                            <Link href="/" className={classes.link__hover} >
+                            <NavLink to="/" className={classes.link__hover} exact onClick={(event) => handleListItemClick(event, 0)}>
                              <ListItem button 
                                 selected={selectedIndex === 0}
-                                onClick={(event) => handleListItemClick(event, 0)}
-                                style={{ color: selectedIndex === 0 ? classes.item__select : ''}}
                                 >
                                     <ListItemIcon>
                                         <Dashboard className={classes.icon__feature}/>
                                     </ListItemIcon>
                                     <ListItemText primary="Dashboard" style={{ color: colors.white }}/>
                                 </ListItem>
-                          
-                              </Link>
-                              <Link href="sms" className={classes.link__hover}>
+                             </NavLink>
+                              <NavLink to="/sms" className={classes.link__hover} onClick={(event) => handleListItemClick(event, 1)}>
                                 <ListItem button
                                     selected={selectedIndex === 1}
-                                    selectedColor="red"
-                                    onClick={(event) => handleListItemClick(event, 1)}
                                 >
                                     <ListItemIcon>
                                         <Email className={classes.icon__feature}/>
                                     </ListItemIcon>
                                     <ListItemText primary="SMS" style={{ color: colors.white }}/>
                                 </ListItem>
-                             </Link>
-                             <Link href="/account" className={classes.link__hover}v>
+                             </NavLink>
+                             <NavLink to="/account" className={classes.link__hover} onClick={(event) => handleListItemClick(event, 2)}>
                                 <ListItem button
                                     selected={selectedIndex === 2}
-                                    onClick={(event) => handleListItemClick(event, 2)}
                                 >
                                     <ListItemIcon>
                                         <AccountTree className={classes.icon__feature}/>
                                     </ListItemIcon>
                                     <ListItemText primary="Account" style={{ color: colors.white }}/>
                                 </ListItem>
-                            </Link>
-                            <Link href="/about" className={classes.link__hover}>
+                            </NavLink>
+                            {/* <Link href="/about" className={classes.link__hover}>
                                 <ListItem button
                                     selected={selectedIndex === 3}
-                                    onClick={(event) => handleListItemClick(event, 3)}
+                                    // onClick={(event) => handleListItemClick(event, 3)}
                                 >
                                     <ListItemIcon>
                                         <Info className={classes.icon__feature}/>
@@ -100,14 +94,14 @@ const Layout = props =>{
                             <Link href="/setting" className={classes.link__hover}>
                                 <ListItem button
                                     selected={selectedIndex === 4}
-                                    onClick={(event) => handleListItemClick(event, 4)}
+                                    // onClick={(event) => handleListItemClick(event, 4)}
                                 >
                                     <ListItemIcon>
                                         <Settings className={classes.icon__feature}/>
                                     </ListItemIcon>
                                     <ListItemText primary="Setting" style={{ color: colors.white }}/>
                                 </ListItem> 
-                            </Link>
+                            </Link> */}
                         </List>
                     </Box>  
                 </Box>  

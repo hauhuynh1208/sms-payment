@@ -75,12 +75,13 @@ export default makeStyles((theme) => ({
         borderRadius: 5,
      },
      link__hover:{
-         
+         textDecoration: 'none',
          '&& :hover':{
             backgroundColor: 'black !important',
             borderRadius: '5px !important',
             paddingRight: 5,
             opacity: 0.5,
+            
         }
      }
 

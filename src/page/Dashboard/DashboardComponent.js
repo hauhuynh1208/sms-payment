@@ -26,41 +26,45 @@ import colors from '../../util/colors'
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: colors.gray,
-      color: theme.palette.common.white,
-    },
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
+// const StyledTableCell = withStyles((theme) => ({
+//     head: {
+//       backgroundColor: colors.gray,
+//       color: theme.palette.common.white,
+//     },
+//     body: {
+//       fontSize: 14,
+//     },
+//   }))(TableCell);
 
-  const StyledTableRow = withStyles((theme) => ({
-    root: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  }))(TableRow);
+//   const StyledTableRow = withStyles((theme) => ({
+//     root: {
+//       '&:nth-of-type(odd)': {
+//         backgroundColor: theme.palette.action.hover,
+//       },
+//     },
+//   }))(TableRow);
   
   
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
-  }
+// function createData(name, calories, fat, carbs, protein) {
+//     return { name, calories, fat, carbs, protein };
+//   }
   
-  const rows = [
-    createData('Vietcombank-Bank1', 10000000, 5000000, 20000000, 30000000),
-    createData('Vietcombank-Bank2', 12000000, 5300000, 23500000, 31000000),
-    createData('Techcombank-Bank1', 10000000, 5000000, 20040000, 30000000),
-    createData('Tiền mặt - kết toán', 20000000, 4100000, 20000000, 30000000),
-    createData('Tiền mặt Kế toán', 30000000, 5220000, 20000000, 30000000),
-  ];
+//   const rows = [
+//     createData('Vietcombank-Bank1', 10000000, 5000000, 20000000, 30000000),
+//     createData('Vietcombank-Bank2', 12000000, 5300000, 23500000, 31000000),
+//     createData('Techcombank-Bank1', 10000000, 5000000, 20040000, 30000000),
+//     createData('Tiền mặt - kết toán', 20000000, 4100000, 20000000, 30000000),
+//     createData('Tiền mặt Kế toán', 30000000, 5220000, 20000000, 30000000),
+//   ];
   
 
-const Dashboard = props => {
+
+
+const DashboardComponent = props => {
     
-        const options1 = {
+       const {dataCircle, dataLine} = props
+
+       const options1 = {
 			animationEnabled: true,
 			title: {
 				// text: "Customer Satisfaction"
@@ -73,89 +77,44 @@ const Dashboard = props => {
             }],
 			data: [{
 				type: "doughnut",
-				//showInLegend: true,
+				showInLegend: true,
 				indexLabel: "{name}: {y}",
 				yValueFormatString: "#,###'%'",
-				dataPoints: [
-					{ name: "ACB", y: 12 },
-					{ name: "VIetCombank", y: 31 },
-					{ name: "Agribank", y: 40 },
-					{ name: "Other", y: 17 },
-				]
+                dataPoints: dataCircle
 			}]
         }
-        
-
 
         const options2 = {
 			animationEnabled: true,
 			title:{
-				//text: "Monthly Sales - 2017"
+				// text: "Monthly Sales - 2017"
 			},
 			axisX: {
 				valueFormatString: "MMM"
 			},
 			axisY: {
-				//title: "Sales (in USD)",
+				// title: "Sales (in USD)",
 				prefix: "$",
 				includeZero: false
 			},
 			data: [{
 				yValueFormatString: "$#,###",
-				xValueFormatString: "MMMM",
+                xValueFormatString: "MMMM",
                 type: "spline",
                 showInLegend: true,
-				dataPoints: [
-					{ x: new Date(2017, 0), y: 25060 },
-					{ x: new Date(2017, 1), y: 27980 },
-					{ x: new Date(2017, 2), y: 42800 },
-					{ x: new Date(2017, 3), y: 32400 },
-					
-	
-				],
-				
-			},
-			{
-				yValueFormatString: "$#,###",
-				xValueFormatString: "MMMM",
-                type: "spline",
-                showInLegend: true,
-				dataPoints: [
-                    { x: new Date(2017, 0), y: 25060 },
-					{ x: new Date(2017, 1), y: 30000 },
-					{ x: new Date(2017, 2), y: 34000 },
-					{ x: new Date(2017, 3), y: 22800 },
-				],	
-			},
-			{
-				yValueFormatString: "$#,###",
-				xValueFormatString: "MMMM",
-                type: "spline",
-                showInLegend: true,
-				dataPoints: [
-                    { x: new Date(2017, 0), y: 26060 },
-					{ x: new Date(2017, 1), y: 28980 },
-					{ x: new Date(2017, 2), y: 39800 },
-					{ x: new Date(2017, 3), y: 40400 },	
-				],		
-			}
-		]
-			
+                dataPoints: dataLine
+			}	
+		]	
         }
-        
-
+    
         const [age, setAge] = React.useState('');
 
         const handleChange = (event) => {
           setAge(event.target.value);
         };
-
-
-       
-          
+      
         const classes  = styles()
         return(
-            <Layout>
                 <Box className={classes.root__dashboard}>
                     <Box pb={5} display="flex" justifyContent="space-between">
                         <Box>
@@ -193,7 +152,7 @@ const Dashboard = props => {
                         </Box>
                     </Box>
                    
-                    <TableContainer component={Paper}>
+                    {/* <TableContainer component={Paper}>
                         <Table className={classes.table} aria-label="customized table">
                             <TableHead>
                             <TableRow>
@@ -218,12 +177,12 @@ const Dashboard = props => {
                             ))}
                             </TableBody>
                         </Table>
-                    </TableContainer>
+                    </TableContainer> */}
                 </Box>
-            </Layout>
+  
         )
     
 }
-export default Dashboard
+export default DashboardComponent
 
 
