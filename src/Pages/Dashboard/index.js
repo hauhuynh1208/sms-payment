@@ -49,57 +49,87 @@ class Dashboard extends React.Component {
         this.state = {
             dataCircle: [],
             keysObj: [],
-            dataLine: [],
+            dataLine: {},
+            report: [],
+            circle: [],
+            line: []
         }
         
      
     } 
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if(nextProps.report.data){
+            console.log(nextProps.report.data, 'data')
+            return{
+            
+                report: nextProps.report.data,  
+                dataCircle: nextProps.report.data.circle,
+                dataLine: nextProps.report.data.line,
+            }
+        }
+
+        // if(nextProps.report.data){
+        //     console.log('circle')
+        //     return{
+        //         dataCircle: nextProps.report.data.circle,
+        //     }
+        // }
+        // if(nextProps.report.data){
+        //     console.log('line')
+        //     return{
+        //         dataLine: nextProps.report.data.line,
+        //     }
+        // }
+       
+    }
     componentDidMount(){
         this.props.getReportAction();
         this.convertChart(); 
     }
-    // static getDerivedStateFromProps(nextProps, prevState) {
-    //     console.log(nextProps, 'console nextProps')
-       
-    // }
+  
 
 
     convertChart= () => {
+        const {dataCircle, dataLine} = this.state
+        console.log(dataCircle, "data circle")
+        console.log(dataLine, "data line")
         const arrCircle = []
         var keys = []
         var arrLine = []
 
 
         //convert circle
-        {circle.map((item, idx) => {    
+        {dataCircle.map((item, idx) => {    
             arrCircle.push({name: item.name, y : item.percent})
         })}
         this.setState({
-            dataCircle: arrCircle
+            circle: arrCircle
         })
 
 
         //convert line
-        getObj(line,keys)  
-        {keys.map((itemKey,idx) => {
-            for( idx; idx < keys.length; ){
-                arrLine.push({x : new Date(itemKey), y : line[itemKey]});
-                break;
-            }
-        })}
-        this.setState({
-            dataLine: arrLine
-        })
+        // getObj(dataLine,keys)  
+        // {keys.map((itemKey,idx) => {
+        //     for( idx; idx < keys.length; ){
+        //         arrLine.push({x : new Date(itemKey), y : dataLine[itemKey]});
+        //         break;
+        //     }
+        // })}
+        // this.setState({
+        //     line: arrLine
+        // })
 
     }
     render(){
-        // const {report} = this.props
-        // console.log(report.data.circle, 'report')
+        const {circle, line} = this.state
+        console.log(circle, line ,"circle and line")
         
         return(
             <Layout>
-                <DashboardComponent dataCircle ={this.state.dataCircle} dataLine={this.state.dataLine} />
+                <DashboardComponent 
+                // dataCircle ={this.state.dataCircle} dataLine={this.state.dataLine} 
+                />
             </Layout>
         )
     }

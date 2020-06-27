@@ -13,7 +13,6 @@ const AccountComponent = props => {
           { title: 'Address', field: 'address' },
             
         ],
-        data: dataAccount
       });
     
         return(
@@ -21,7 +20,7 @@ const AccountComponent = props => {
                     <MaterialTable
                             title="Manager Account"
                             columns={state.columns}
-                            data={state.data}
+                            data={dataAccount}
                             editable={{
                                 onRowAdd: (newData) =>
                                 new Promise((resolve) => {
