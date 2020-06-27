@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx'
 import {
     Box,
     Typography,
@@ -6,21 +7,17 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
+    // Link,
   } from '@material-ui/core'
+import {Link, NavLink} from 'react-router-dom'
 import {AcUnit, Dashboard, Email, AccountTree, Info, Settings} from '@material-ui/icons';
 import useStyles from './style'
-import colors from '../../util/colors'
-import { NavLink } from 'react-router-dom'
+import colors from '../../styles/colors'
 
-var x = 0;
 const Layout = props =>{
-    const [selectedIndex, setSelectedIndex] = React.useState(x);
-    const handleListItemClick = (event, index) => {
-        setSelectedIndex(index);
-        x = index;
-    };
-
+    const [selectedIndex, setSelectedIndex] = React.useState(0);
     const classes  = useStyles()
+    console.log(selectedIndex)
     return(
         <div className={classes.root}>
             <Box minWidth={260}>
@@ -37,7 +34,7 @@ const Layout = props =>{
                     <Box className={classes.mask__image}></Box>
                     <Box className={classes.container}>
                         <Box py={3} display="flex" flexDirection="column" justifyContent="center" alignItems="center" alignContent="center">
-                           <NavLink to="/" exact onClick={(event) => handleListItemClick(event, 0)}>
+                           <NavLink to="/" exact onClick={() => setSelectedIndex(0)}>
                             <AcUnit style={{ fontSize: 56 }} className={classes.icon__feature}/>
                             </NavLink>
                             <Typography variant="h5" style={{color: colors.white}}>
@@ -48,40 +45,44 @@ const Layout = props =>{
                         <Box className={classes.divider_horizontal}/>
 
                         <List component="nav" aria-label="main mailbox folders" >
-                            <NavLink to="/" className={classes.link__hover} exact onClick={(event) => handleListItemClick(event, 0)}>
+                            <Link to='/' className={clsx(classes.link, classes.link__hover)} >
                              <ListItem button 
                                 selected={selectedIndex === 0}
+                                onClick={() => setSelectedIndex(0)}
+                                style={{ color: selectedIndex === 0 ? classes.item__select : ''}}
                                 >
                                     <ListItemIcon>
                                         <Dashboard className={classes.icon__feature}/>
                                     </ListItemIcon>
                                     <ListItemText primary="Dashboard" style={{ color: colors.white }}/>
                                 </ListItem>
-                             </NavLink>
-                              <NavLink to="/sms" className={classes.link__hover} onClick={(event) => handleListItemClick(event, 1)}>
+                              </Link>
+                              <Link to="/sms" className={clsx(classes.link, classes.link__hover)}>
                                 <ListItem button
                                     selected={selectedIndex === 1}
+                                    onClick={() => setSelectedIndex(1)}
                                 >
                                     <ListItemIcon>
                                         <Email className={classes.icon__feature}/>
                                     </ListItemIcon>
                                     <ListItemText primary="SMS" style={{ color: colors.white }}/>
                                 </ListItem>
-                             </NavLink>
-                             <NavLink to="/account" className={classes.link__hover} onClick={(event) => handleListItemClick(event, 2)}>
+                             </Link>
+                             <Link to="/account" className={clsx(classes.link, classes.link__hover)}>
                                 <ListItem button
                                     selected={selectedIndex === 2}
+                                    onClick={() => setSelectedIndex(2)}
                                 >
                                     <ListItemIcon>
                                         <AccountTree className={classes.icon__feature}/>
                                     </ListItemIcon>
                                     <ListItemText primary="Account" style={{ color: colors.white }}/>
                                 </ListItem>
-                            </NavLink>
-                            {/* <Link href="/about" className={classes.link__hover}>
+                            </Link>
+                            <Link to="/about" className={clsx(classes.link, classes.link__hover)}>
                                 <ListItem button
                                     selected={selectedIndex === 3}
-                                    // onClick={(event) => handleListItemClick(event, 3)}
+                                    onClick={() => setSelectedIndex(3)}
                                 >
                                     <ListItemIcon>
                                         <Info className={classes.icon__feature}/>
@@ -89,17 +90,17 @@ const Layout = props =>{
                                     <ListItemText primary="About" style={{ color: colors.white }}/>
                                 </ListItem>
                             </Link>
-                            <Link href="/setting" className={classes.link__hover}>
+                            <Link to="/setting" className={clsx(classes.link, classes.link__hover)}>
                                 <ListItem button
                                     selected={selectedIndex === 4}
-                                    // onClick={(event) => handleListItemClick(event, 4)}
+                                    onClick={() => setSelectedIndex(4)}
                                 >
                                     <ListItemIcon>
                                         <Settings className={classes.icon__feature}/>
                                     </ListItemIcon>
                                     <ListItemText primary="Setting" style={{ color: colors.white }}/>
                                 </ListItem> 
-                            </Link> */}
+                            </Link>
                         </List>
                     </Box>  
                 </Box>  
