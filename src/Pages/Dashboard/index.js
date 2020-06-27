@@ -1,10 +1,11 @@
 import React from 'react'
 import Layout from '../../components/Layout'
 import DashboardComponent from './DashboardComponent'
-import axios from 'axios'
-import {actions} from '../../actions/actions'
+import {reportAction} from '../../actions/reportAction'
 import { connect } from 'react-redux'
 import { helpers } from 'chart.js'
+import { bindActionCreators } from 'redux';
+
 
 const circle = [
     {
@@ -58,34 +59,34 @@ class Dashboard extends React.Component {
      
     } 
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if(nextProps.report.data){
-            console.log(nextProps.report.data, 'data')
-            return{
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     if(nextProps.report.data){
+    //         console.log(nextProps.report.data, 'data')
+    //         // return{
             
-                report: nextProps.report.data,  
-                dataCircle: nextProps.report.data.circle,
-                dataLine: nextProps.report.data.line,
-            }
-        }
+    //         //     report: nextProps.report.data,  
+    //         //     dataCircle: nextProps.report.data.circle,
+    //         //     dataLine: nextProps.report.data.line,
+    //         // }
+    //     }
 
-        // if(nextProps.report.data){
-        //     console.log('circle')
-        //     return{
-        //         dataCircle: nextProps.report.data.circle,
-        //     }
-        // }
-        // if(nextProps.report.data){
-        //     console.log('line')
-        //     return{
-        //         dataLine: nextProps.report.data.line,
-        //     }
-        // }
+    //     // if(nextProps.report.data){
+    //     //     console.log('circle')
+    //     //     return{
+    //     //         dataCircle: nextProps.report.data.circle,
+    //     //     }
+    //     // }
+    //     // if(nextProps.report.data){
+    //     //     console.log('line')
+    //     //     return{
+    //     //         dataLine: nextProps.report.data.line,
+    //     //     }
+    //     // }
        
-    }
+    // }
     componentDidMount(){
-        this.props.getReportAction();
-        this.convertChart(); 
+        this.props.reportAction.getReportAction();
+        // this.convertChart(); 
     }
   
 
@@ -123,7 +124,8 @@ class Dashboard extends React.Component {
     }
     render(){
         const {circle, line} = this.state
-        console.log(circle, line ,"circle and line")
+        const {report} = this.props
+        console.log(report ,"circle and line")
         
         return(
             <Layout>
@@ -142,7 +144,16 @@ function mapStateToProps(state) {
     };
   }
   
+function mapDispatchToProps(dispatch){
+return{
+    reportAction: bindActionCreators(
+        Object.assign({},reportAction),
+        dispatch
+    ),
+}
+}
 
-export default connect(mapStateToProps, actions)(Dashboard)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
 
 

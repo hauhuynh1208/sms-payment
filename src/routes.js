@@ -1,7 +1,7 @@
-import About from './Pages/About/About'
-import Account from './Pages/Account/Account'
-import Dashboard from './Pages/Dashboard/Dashboard'
-import SMS from './Pages/SMS/SMS'
+// import About from './Pages/About'
+import Account from './Pages/Account'
+import Dashboard from './Pages/Dashboard'
+import SMS from './Pages/SMS'
 import Login from './Pages/Login'
 
 export default [
@@ -32,15 +32,15 @@ export default [
     component: Account,
     requireAuth: true,
   },
-  {
-    path: '/about',
-    title: 'About',
-    breadcrumb: 'About',
-    breadcrumb_link: true,
-    exact: true,
-    component: About,
-    requireAuth: true,
-  },
+  // {
+  //   path: '/about',
+  //   title: 'About',
+  //   breadcrumb: 'About',
+  //   breadcrumb_link: true,
+  //   exact: true,
+  //   component: About,
+  //   requireAuth: true,
+  // },
   {
     path: '/login',
     title: 'Login',

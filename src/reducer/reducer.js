@@ -1,14 +1,13 @@
-import  {actionTypes} from '../actions/actionTypes'
-
+import actionConstants from '../actionConstants'
 
 const getSMSReducer = (state = [], action) => {
 
     var _state = JSON.parse(JSON.stringify(state));
     switch (action.type) {
-      case actionTypes.GET_SUCCESS_SMS:
+      case actionConstants.GET_SUCCESS_SMS:
         _state = action.data;
         return _state;
-      case actionTypes.GET_FAILURE_SMS:
+      case actionConstants.GET_FAILURE_SMS:
         return _state;
       default:
         return _state;
@@ -19,10 +18,10 @@ const getSMSReducer = (state = [], action) => {
 
     var _state = JSON.parse(JSON.stringify(state));
     switch (action.type) {
-      case actionTypes.GET_SUCCESS_SMS_DETAIL:
+      case actionConstants.GET_SUCCESS_SMS_DETAIL:
         _state = action.data;
         return _state;
-      case actionTypes.GET_FAILURE_SMS_DETAIL:
+      case actionConstants.GET_FAILURE_SMS_DETAIL:
         return _state;
       default:
         return _state;
@@ -33,10 +32,10 @@ const getSMSReducer = (state = [], action) => {
 
     var _state = JSON.parse(JSON.stringify(state));
     switch (action.type) {
-      case actionTypes.PUT_SUCCESS_SMS_DETAIL:
+      case actionConstants.PUT_SUCCESS_SMS_DETAIL:
         _state = action.data;
         return _state;
-      case actionTypes.PUT_FAILURE_SMS_DETAIL:
+      case actionConstants.PUT_FAILURE_SMS_DETAIL:
         return _state;
       default:
         return _state;
@@ -50,10 +49,10 @@ const getSMSReducer = (state = [], action) => {
 
     var _state = JSON.parse(JSON.stringify(state));
     switch (action.type) {
-      case actionTypes.GET_SUCCESS_ACCOUNT:
+      case actionConstants.GET_SUCCESS_ACCOUNT:
         _state = action.data;
         return _state;
-      case actionTypes.GET_FAILURE_ACCOUNT:
+      case actionConstants.GET_FAILURE_ACCOUNT:
         return _state;
       default:
         return _state;
@@ -64,10 +63,10 @@ const getSMSReducer = (state = [], action) => {
 
     var _state = JSON.parse(JSON.stringify(state));
     switch (action.type) {
-      case actionTypes.POST_SUCCESS_ACCOUNT:
+      case actionConstants.POST_SUCCESS_ACCOUNT:
         _state = action.data;
         return _state;
-      case actionTypes.POST_FAILURE_ACCOUNT:
+      case actionConstants.POST_FAILURE_ACCOUNT:
         return _state;
       default:
         return _state;
@@ -79,10 +78,10 @@ const getSMSReducer = (state = [], action) => {
 
     var _state = JSON.parse(JSON.stringify(state));
     switch (action.type) {
-      case actionTypes.PUT_SUCCESS_ACCOUNT_DETAIL:
+      case actionConstants.PUT_SUCCESS_ACCOUNT_DETAIL:
         _state = action.data;
         return _state;
-      case actionTypes.PUT_FAILURE_ACCOUNT_DETAIL:
+      case actionConstants.PUT_FAILURE_ACCOUNT_DETAIL:
         return _state;
       default:
         return _state;
@@ -93,10 +92,10 @@ const getSMSReducer = (state = [], action) => {
 
     var _state = JSON.parse(JSON.stringify(state));
     switch (action.type) {
-      case actionTypes.DEL_SUCCESS_ACCOUNT_DETAIL:
+      case actionConstants.DEL_SUCCESS_ACCOUNT_DETAIL:
         _state = action.data;
         return _state;
-      case actionTypes.DEL_FAILURE_ACCOUNT_DETAIL:
+      case actionConstants.DEL_FAILURE_ACCOUNT_DETAIL:
         return _state;
       default:
         return _state;
@@ -110,10 +109,10 @@ const getReportReducer = (state = [], action) => {
 
   var _state = JSON.parse(JSON.stringify(state));
   switch (action.type) {
-    case actionTypes.GET_SUCCESS_REPORT:
+    case actionConstants.GET_SUCCESS_REPORT:
       _state = action.data;
       return _state;
-    case actionTypes.GET_FAILURE_REPORT:
+    case actionConstants.GET_FAILURE_REPORT:
       return _state;
     default:
       return _state;

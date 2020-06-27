@@ -1,4 +1,4 @@
-import actionConstants from '../actionConstants'
+import   actionConstants  from '../actionConstants'
 
 const initState = {
     loading: false,

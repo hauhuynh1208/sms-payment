@@ -2,9 +2,7 @@ import React from 'react'
 import {
     Box,
   } from '@material-ui/core'
-import Layout from '../../components/Layout'
 import MaterialTable from 'material-table';
-import {connect } from 'react-redux'
 
 const SMSComponent = props => {
     const { smsData } = props

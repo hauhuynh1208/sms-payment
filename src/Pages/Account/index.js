@@ -1,8 +1,9 @@
 import React from 'react'
 import Layout from '../../components/Layout'
 import AccountComponent from './AccountComponent'
-import { actions } from '../../actions/actions'
+import getAccountAction from '../../actions/accountActions'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 
 class Account extends React.Component {
     constructor(props){
@@ -28,9 +29,6 @@ class Account extends React.Component {
      
         
     }
-
-
-
      render(){
         const { account } = this.state
         return(
@@ -48,4 +46,14 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, actions)(Account)
+function mapDispatchToProps(dispatch){
+    return{
+        getAccountAction: bindActionCreators(
+            Object.assign({},getAccountAction),
+            dispatch
+        ),
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Account)
