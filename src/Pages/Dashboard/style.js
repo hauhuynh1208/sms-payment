@@ -11,12 +11,22 @@ const styles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingBottom: theme.spacing(8)
+        paddingBottom: theme.spacing(8),
+        zIndex: 0
     },
     form__chart:{
-        width: 250
+        width: theme.spacing(31.25)
     },
-    
+    mask__trialVersion:{
+      position: 'absolute',
+      height: theme.spacing(5),
+      width: theme.spacing(10),
+      backgroundColor: colors.white,
+      marginTop: - theme.spacing(4),
+    },
+    chart__point:{
+        cursor: 'pointer'
+    },
 
 }))
 

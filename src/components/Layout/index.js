@@ -9,7 +9,7 @@ import {
     ListItemText,
     // Link,
   } from '@material-ui/core'
-import {Link} from 'react-router-dom'
+import {Link, NavLink} from 'react-router-dom'
 import {AcUnit, Dashboard, Email, AccountTree, Info, Settings} from '@material-ui/icons';
 import useStyles from './style'
 import colors from '../../styles/colors'
@@ -28,14 +28,15 @@ const Layout = props =>{
                     //     : `url(${activity1})`,
                     // }} 
                     style={{
-                        backgroundImage: `url(${'https://www.luavietours.com/datafiles/galagy/15374395734631_tour_nam_du_2-ngayjpg.jpg'})`
+                        backgroundImage: `url(${'https://chothuexe7cho.com/wp-content/uploads/2016/03/cho-thue-xe-7-cho-di-bien-thien-cam-gia-re33.jpg'})`
                     }}
                 >
                     <Box className={classes.mask__image}></Box>
                     <Box className={classes.container}>
-                    
                         <Box py={3} display="flex" flexDirection="column" justifyContent="center" alignItems="center" alignContent="center">
+                           <NavLink to="/" exact onClick={() => setSelectedIndex(0)}>
                             <AcUnit style={{ fontSize: 56 }} className={classes.icon__feature}/>
+                            </NavLink>
                             <Typography variant="h5" style={{color: colors.white}}>
                                 Payment Service
                             </Typography>
