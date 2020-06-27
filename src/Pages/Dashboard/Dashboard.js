@@ -21,12 +21,7 @@ import { useTheme } from '@material-ui/core/styles'
 import styles from './style'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
-<<<<<<< HEAD:src/Pages/Dashboard/Dashboard.js
 import colors from '../../styles/colors'
-=======
-
-import colors from '../../util/colors'
->>>>>>> 63bdb4a8b6c39287b51450dd206a4c474894b33c:src/Pages/Dashboard/DashboardComponent.js
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
