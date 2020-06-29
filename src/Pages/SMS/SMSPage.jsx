@@ -7,9 +7,10 @@ import MaterialTable from 'material-table';
 const SMSPage = props => {
     const { smsData } = props
 
+
     const [state, setState] = React.useState({
         columns: [
-        { title: 'Id', field: 'id' },
+        { title: 'Id', field: '_id' },
         { title: 'Amount', field: 'amount' },
         { title: 'Bank', field: 'address'},
         { title: 'Body', field: 'body'},
@@ -17,6 +18,7 @@ const SMSPage = props => {
         { title: 'Status', field: 'status' },
         { title: 'Note', field: 'note' },
         ],
+
 
     });
         
@@ -42,30 +44,31 @@ const SMSPage = props => {
                     onRowUpdate: (newData, oldData) =>
                     new Promise((resolve) => {
                         console.log(newData, 'newdata');
+                        console.log(oldData, 'oldData');
+
+                         props.putSMSAction(newData);
                         setTimeout(() => {
                         resolve();
+                       
                         if (oldData) {
-                            setState((prevState) => {
-                            const data = [...prevState.data];
-                            data[data.indexOf(oldData)] = newData;
-                            console.log( data, 'data updatte')
-                            return { ...prevState, data };
-                            });
+                            
+                            return  smsData ;
+                           
                         }
                         }, 600);
                     }),
-                    onRowDelete: (oldData) =>
-                    new Promise((resolve) => {
-                        console.log(oldData, 'del data')
-                        setTimeout(() => {
-                        resolve();
-                        setState((prevState) => {
-                            const data = [...prevState.data];
-                            data.splice(data.indexOf(oldData), 1);
-                            return { ...prevState, data };
-                        });
-                        }, 600);
-                    }),
+                    // onRowDelete: (oldData) =>
+                    // new Promise((resolve) => {
+                    //     console.log(oldData, 'del data')
+                    //     setTimeout(() => {
+                    //     resolve();
+                    //     setState((prevState) => {
+                    //         const data = [...prevState.data];
+                    //         data.splice(data.indexOf(oldData), 1);
+                    //         return { ...prevState, data };
+                    //     });
+                    //     }, 600);
+                    // }),
                 }}
             />  
         </Box>

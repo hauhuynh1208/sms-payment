@@ -3,7 +3,7 @@ import axios from 'axios';
 import { URL } from '../utils/config';
 
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWYzMzg2YjUwM2FmNjc4NzJlNDcwY2EiLCJpYXQiOjE1OTI5OTk0NzAsImV4cCI6MTU5MzYwNDI3MH0.mxA0MeTvAl1OgTQzL0J6iObC7J-s4wVq-hFDJgPdIrE"
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWYzMzg2YjUwM2FmNjc4NzJlNDcwY2EiLCJpYXQiOjE1OTMzMTI0NTAsImV4cCI6MTU5MzkxNzI1MH0.7zCw28lP4ffCje2NhaljyRr1sxhJGuAbXkF-zp2N57U"
 
 const headers = { headers: {
     'Authorization': token
@@ -71,10 +71,10 @@ function getSMSActionDetail(id){
     }
 }
 
-function putSMSAction(id){
+function putSMSAction(id,code){
     return(dispatch, getState) => {
         dispatch({type: actionConstants.START_QUERY});
-        axios.get(`${URL}/sms/:${id}`,headers )
+        axios.put(`${URL}/sms/:${id}`,headers, {body : code} )
         .then(res => {
             dispatch({
                 type: actionConstants.END_QUERY

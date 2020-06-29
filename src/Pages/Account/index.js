@@ -4,6 +4,7 @@ import AccountPage from './AccountPage'
 import { accountUserActions } from '../../actions/accountUserActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
+import axios from 'axios'
 
 class Account extends React.Component {
     constructor(props){
@@ -28,14 +29,25 @@ class Account extends React.Component {
     }
     componentDidMount(){
         this.props.accountUserActions.getAccountAction();
-     
-        
     }
+
+    // postAccount = () => {
+    //     var code = {  
+    //         "email": "vinhtu@email.com",
+    //         "password": "1234567",
+    //         "firstname": "subtest",
+    //         "lastname": "tu",
+    //         "phone": "098076005",
+    //         "address": "180 cao lo, p4, q8, hcm"    
+    //       }
+    //       // this.props.smsActions.putSMSAction(id,code)
+          
+    // }
      render(){
         const { account } = this.state
         return(
            <Layout>
-               <AccountPage dataAccount={account}/>
+               <AccountPage dataAccount={account} postAccount={this.postAccount}/>
            </Layout>
         )
     
