@@ -22,7 +22,6 @@ function getSMSActionAll(){
         dispatch({type: actionConstants.START_QUERY});
         axios.get(`${URL}/sms?_sort=-createdAt,-amount&_limit=3&_skip=0`,headers )
         .then(res => {
-            console.log(res)
             dispatch({
                 type: actionConstants.END_QUERY
             });

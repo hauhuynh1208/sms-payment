@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import axios from 'axios'
 
 import SMSComponent from './SMSPage' 
+import { put } from '../../actions/RequestAdapter';
 
 
 class SMS extends React.Component {
@@ -27,8 +28,8 @@ class SMS extends React.Component {
         }  
     }
 
-   componentDidMount(){
-       this.props.smsActions.getSMSActionAll();
+   async componentDidMount(){
+    //    this.props.smsActions.getSMSActionAll();
 
     //call api put
        var code = { 
@@ -45,11 +46,16 @@ class SMS extends React.Component {
             'Authorization': token,
           }
        }
-       axios.put(`http://150.95.108.49/api/sms/:${id}`,headers, {data: code} )
-        .then(res => console.log(res, "res"))
-        .catch(error => {
-            console.log(error.message, "error");
-       })
+       const params = {
+           token,
+           body: code
+       }
+       put(`sms/${id}`, params).then(resp=>console.log(resp)).catch(err=>console.log(err))
+    //    await axios.put(`http://150.95.108.49/api/sms/${id}`,headers, {data: code} )
+    //     .then(res => console.log(res, "res"))
+    //     .catch(error => {
+    //         console.log(error.message, "error");
+    //    })
 
     }
 

@@ -86,7 +86,7 @@ export async function put(url, params) {
       method: 'put',
       url: `${URL}/${url}`,
       headers,
-      withCredentials: true,
+      // withCredentials: true,
       data,
     };
 
