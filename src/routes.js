@@ -1,10 +1,20 @@
-// import About from './Pages/About'
-import Account from './Pages/Account'
+
+import Login from './Pages/Login'
 import Dashboard from './Pages/Dashboard'
 import SMS from './Pages/SMS'
-import Login from './Pages/Login'
+import Account from './Pages/Account'
+import About from './Pages/About'
+import Setting from './Pages/Setting'
 
 export default [
+  {
+    path: '/login',
+    title: 'Login',
+    breadcrumb: 'Login',
+    breadcrumb_link: true,
+    exact: true,
+    component: Login,
+  },
   {
     path: '/',
     title: 'Dashboard',
@@ -32,21 +42,23 @@ export default [
     component: Account,
     requireAuth: true,
   },
-  // {
-  //   path: '/about',
-  //   title: 'About',
-  //   breadcrumb: 'About',
-  //   breadcrumb_link: true,
-  //   exact: true,
-  //   component: About,
-  //   requireAuth: true,
-  // },
   {
-    path: '/login',
-    title: 'Login',
-    breadcrumb: 'Login',
+    path: '/about',
+    title: 'About',
+    breadcrumb: 'About',
     breadcrumb_link: true,
     exact: true,
-    component: Login,
+    component: About,
+    requireAuth: true,
   },
+  {
+    path: '/setting',
+    title: 'Setting',
+    breadcrumb: 'Setting',
+    breadcrumb_link: true,
+    exact: true,
+    component: Setting,
+    requireAuth: true,
+  },
+  
 ]

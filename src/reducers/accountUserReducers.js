@@ -1,8 +1,6 @@
-import  actionConstants from '../actionConstants'
-
+import actionConstants from '../actionConstants'
 
   const getAccountReducer = (state = [], action) => {
-
     var _state = JSON.parse(JSON.stringify(state));
     switch (action.type) {
       case actionConstants.GET_SUCCESS_ACCOUNT:
@@ -16,7 +14,6 @@ import  actionConstants from '../actionConstants'
   };
 
   const postAccountReducer = (state = [], action) => {
-
     var _state = JSON.parse(JSON.stringify(state));
     switch (action.type) {
       case actionConstants.POST_SUCCESS_ACCOUNT:
@@ -29,9 +26,7 @@ import  actionConstants from '../actionConstants'
     }
   };
 
-
   const putAccountReducer = (state = [], action) => {
-
     var _state = JSON.parse(JSON.stringify(state));
     switch (action.type) {
       case actionConstants.PUT_SUCCESS_ACCOUNT_DETAIL:
@@ -45,7 +40,6 @@ import  actionConstants from '../actionConstants'
   };
 
   const delAccountReducer = (state = [], action) => {
-
     var _state = JSON.parse(JSON.stringify(state));
     switch (action.type) {
       case actionConstants.DEL_SUCCESS_ACCOUNT_DETAIL:
@@ -58,11 +52,10 @@ import  actionConstants from '../actionConstants'
     }
   };
 
-  
-  export default {
-    getAccountReducer,
-    postAccountReducer,
-    putAccountReducer,
-    delAccountReducer
+export const accountUserReducers = {
+  getAccountReducer,
+  postAccountReducer,
+  putAccountReducer,
+  delAccountReducer
+
 }
-  

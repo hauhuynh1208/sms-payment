@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import accountReducers from './accountReducers'
-import {reducers} from '../reducer/reducer'
-
-
+import { smsReducers } from './smsReducers'
+import { accountUserReducers } from './accountUserReducers'
+import { reportReducers } from './reportReducers'
 export default combineReducers({
   account: accountReducers,
-  sms: reducers.getSMSReducer,
-  accountUser : reducers.getAccountReducer,
-  report: reducers.getReportReducer
+  sms: smsReducers.getSMSReducer,
+  accountUser : accountUserReducers.getAccountReducer,
+  report: reportReducers.getReportReducer
 });

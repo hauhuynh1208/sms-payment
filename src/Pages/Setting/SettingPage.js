@@ -1,12 +1,12 @@
 import React from 'react'
 
-class About extends React.Component{
+class SettingPage extends React.Component{
     render(){
         return(
             <div>
-                
+                No Data
             </div>
         )
     }
 }
-export default About
+export default SettingPage

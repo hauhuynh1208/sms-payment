@@ -1,24 +1,18 @@
 import React from 'react'
+import SMSPage from './SMSPage' 
 import Layout from '../../components/Layout'
-import MaterialTable from 'material-table';
-import { connect } from 'react-redux'
 import {smsActions} from '../../actions/smsActions'
+import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import axios from 'axios'
-
-import SMSComponent from './SMSPage' 
 import { put } from '../../actions/RequestAdapter';
-
 
 class SMS extends React.Component {
    constructor(props){
        super(props)
        this.state = {
-           sms : []
+           sms : [],
        }
-       
    }
-
   
    static getDerivedStateFromProps(nextProps, prevState) {
         if(nextProps.sms.data){  
@@ -29,70 +23,48 @@ class SMS extends React.Component {
     }
 
    async componentDidMount(){
-    //    this.props.smsActions.getSMSActionAll();
-
-    //call api put
-       var code = { 
-        "status": "status",
-        "note": "paid"
-        
+       this.props.smsActions.getSMSActionAll();
+    }
+       
+    componentDidUpdate(previousProps, previousState, snapshot) {
+        if(this.state.sms != previousState.sms){
+            return{
+                 sms :  previousState.sms,
+            }
+        }
       }
 
-       const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWYzMzg2YjUwM2FmNjc4NzJlNDcwY2EiLCJpYXQiOjE1OTI5OTk0NzAsImV4cCI6MTU5MzYwNDI3MH0.mxA0MeTvAl1OgTQzL0J6iObC7J-s4wVq-hFDJgPdIrE"
+    putSMS = (newData) => {
+        var code = { 
+            "status": newData.status,
+            "note": newData.note   
+        }
+        var id = newData._id
 
-       var id = '5ef34036ee91fb79034fc95e'
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWYzMzg2YjUwM2FmNjc4NzJlNDcwY2EiLCJpYXQiOjE1OTI5OTk0NzAsImV4cCI6MTU5MzYwNDI3MH0.mxA0MeTvAl1OgTQzL0J6iObC7J-s4wVq-hFDJgPdIrE"
 
-       const headers = { headers :{
-            'Authorization': token,
-          }
-       }
-       const params = {
+        const params = {
            token,
            body: code
-       }
-       put(`sms/${id}`, params).then(resp=>console.log(resp)).catch(err=>console.log(err))
-    //    await axios.put(`http://150.95.108.49/api/sms/${id}`,headers, {data: code} )
-    //     .then(res => console.log(res, "res"))
-    //     .catch(error => {
-    //         console.log(error.message, "error");
-    //    })
-
-    }
-
-
-
-
-
-       
-    
-   putSMS = (newData) => {
-    //   var id = newData._id
-      
-    //   console.log(id, 'id')
-    //   console.log(code, 'code')
-    //   // this.props.smsActions.putSMSAction(id,code)
-    //   const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWYzMzg2YjUwM2FmNjc4NzJlNDcwY2EiLCJpYXQiOjE1OTI5OTk0NzAsImV4cCI6MTU5MzYwNDI3MH0.mxA0MeTvAl1OgTQzL0J6iObC7J-s4wVq-hFDJgPdIrE"
-
-    //   const headers = { headers: {
-    //       'Authorization': token,
-    //      },
-    //   }
-    //   Promise.all([
-      
-    //   ])
-    //   axios.get(`http://150.95.108.49/api/sms?_sort=-createdAt,-amount&_limit=3&_skip=0`,headers )
-    //   .then(res => console.log(res, 'res'))
-
-
+        }
+        put(`sms/${id}`, params)
+        .then(resp=> (
+             this.setState({
+                sms: resp.data
+            })
+          )
+        ).catch(err=>console.log(err))    
    }
-
+    
+   reloadPage = () => {
+       window.location.reload();
+   }
 
    render(){
         const { sms } = this.state
-        console.log(sms, 'sms')
         return(
             <Layout>
-               <SMSComponent smsData={sms} putSMSAction={this.putSMS}/>
+               <SMSPage smsData={sms} putSMSAction={this.putSMS} reloadPage={this.reloadPage}/>
             </Layout>     
         )
     }   

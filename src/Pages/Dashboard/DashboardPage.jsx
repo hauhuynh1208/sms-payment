@@ -14,13 +14,11 @@ import {
     TableCell, 
     TableBody,
     Paper
-    
   } from '@material-ui/core'
-
 import { useTheme } from '@material-ui/core/styles'
-import styles from './style'
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
+import styles from './style'
 import colors from '../../styles/colors'
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
@@ -58,12 +56,136 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
   
 
 
+const data = {
+    "circle": [
+        {
+            "name": "Vietcombank",
+            "code": "VCB",
+            "percent": 70
+        },
+        {
+            "name": "Acb",
+            "code": "ACB",
+            "percent": 20
+        },
+        {
+            "name": "Other",
+            "code": "OTHER",
+            "percent": 10
+        }
+    ],
+    "line": {
+        "07/06": 6869248,
+        "14/06": 9576031,
+        "21/06": 4328985,
+        "28/06": 6290117,
+        "05/07": 4638263
+    }
+}
+
+var val = 10
 
 const DashboardPage = props => {
     
        const {dataCircle, dataLine} = props
 
-       const options1 = {
+        const [age, setAge] = React.useState(10); 
+        var line = []
+       
+        const handleChange = (event) => {
+          setAge(event.target.value);
+           val = event.target.value
+          formatData(event.target.value)
+         
+          
+        };
+       
+        const formatData = (val) => {
+            var d = new Date();
+            var currentDate = d.getDate(); //lấy ngày hiện tại
+            var currentMonth = d.getMonth(); // lấy tháng hiện tại
+            var currentYear = d.getYear(); //lấy năm hiện tại
+            if(val == 10){
+                if(currentDate >= 1 && currentDate <= 6 ){
+                    {dataLine.map((item, idx) => {    
+                        const date = new Date(item.x); //này là covert lại ban đầu để lấy ra ngày tháng hoặc năm CỦA TỪNG DỮ LIỆU để đi so sánh
+                        const dateData = date.getDate(); // Này là lấy ra ngày  
+                        const montData = date.getMonth() // Này là lấy ra tháng 
+                        const yearData = date.getYear()  // // Này là lấy ra năm
+                        if((dateData >= 1 && dateData <= 6 ) && (currentMonth == montData)){ // so sánh xem nếu có dữ liệu nào nằm trong khoảng này thì lấy ra
+                            line.push(item)
+                        }
+                    
+                    })}
+                    
+                    return line
+                }
+                else if(d >= 7 && d <= 14 ){
+                    {dataLine.map((item, idx) => {    
+                        const date = new Date(item.x);
+                        const dateData = date.getDate();
+                        const montData = date.getMonth()
+                        const yearData = date.getYear()
+                        if((dateData >= 7 && dateData <= 14) && (currentMonth == montData)){ 
+                            line.push(item)
+                        }
+                    
+                    })}
+                    
+                    return line
+                    
+                }
+                else if(d >= 15 && d <= 22 ){
+                    {dataLine.map((item, idx) => {    
+                        const date = new Date(item.x);
+                        const dateData = date.getDate();
+                        const montData = date.getMonth()
+                        const yearData = date.getYear()
+                        if(dateData >= 15 && dateData <= 22){
+                            line.push(item)
+                        }
+                    
+                    })}
+            
+                    return line
+                }
+                else{
+                {dataLine.map((item, idx) => {    
+                        const date = new Date(item.x);
+                        const dateData = date.getDate();
+                        const montData = date.getMonth()
+                        const yearData = date.getYear()   
+                        if((dateData >= 23 && dateData <= 31) && (currentMonth == montData)){
+                            line.push(item)
+                        }
+                    })}      
+                    return line
+                }
+          }
+          if(val == 20){
+            {dataLine.map((item, idx) => {    
+                const date = new Date(item.x);
+                const monthData = date.getMonth();
+                const yearData = date.getYear()
+                if((monthData == currentMonth)){
+                    line.push(item)
+                }         
+            })}
+            return line
+          }
+          if(val == 30){
+            {dataLine.map((item, idx) => {    
+                const date = new Date(item.x);
+                const monthData = date.getMonth();
+                const yearData = date.getYear()
+                if((monthData == (currentMonth + 1))){
+                    line.push(item)   
+                }
+            })}
+            return line
+           }
+        }
+        const options1 = {
 			animationEnabled: true,
 			title: {
 				// text: "Customer Satisfaction"
@@ -101,17 +223,10 @@ const DashboardPage = props => {
                 xValueFormatString: "MMMM",
                 type: "spline",
                 showInLegend: true,
-                dataPoints: dataLine
-			}	
-		]	
+                dataPoints: formatData(val),            
+			}],
         }
     
-        const [age, setAge] = React.useState('');
-
-        const handleChange = (event) => {
-          setAge(event.target.value);
-        };
-      
         const classes  = styles()
         return(
                 <Box className={classes.root__dashboard}>
@@ -128,12 +243,10 @@ const DashboardPage = props => {
                                 onChange={handleChange}
                                 label="Hiển thị doanh số theo"
                             >
-                            <MenuItem value="">
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10} >Hiển thị theo tuần này</MenuItem>
-                            <MenuItem value={20}>Hiển thị theo tháng này</MenuItem>
-                            <MenuItem value={30}>Hiển thị theo tháng trước</MenuItem>
+                         
+                                <MenuItem value={10} >Hiển thị theo tuần này</MenuItem>
+                                <MenuItem value={20}>Hiển thị theo tháng này</MenuItem>
+                                <MenuItem value={30}>Hiển thị theo tháng trước</MenuItem>
                             </Select>
                         </FormControl>
                         </Box>

@@ -15,11 +15,7 @@ export const accountUserActions = {
     postAccountAction,
     putAccountAction,
     delAccountAction
-
 }
-
-
-
 
 function getAccountAction(){
     return(dispatch, getState) => {

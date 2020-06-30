@@ -3,36 +3,7 @@ import Layout from '../../components/Layout'
 import DashboardPage from './DashboardPage'
 import { reportActions } from '../../actions/reportActions'
 import { connect } from 'react-redux'
-import { helpers } from 'chart.js'
 import { bindActionCreators } from 'redux';
-
-
-const circle = [
-    {
-        "name": "Vietcombank",
-        "code": "VCB",
-        "percent": 70
-    },
-    {
-        "name": "Acb",
-        "code": "ACB",
-        "percent": 20
-    },
-    {
-        "name": "Other",
-        "code": "OTHER",
-        "percent": 10
-    }
-]
-
-const line = {
-    "07/04": 6805841,
-    "08/05": 202641,
-    "09/01": 1872944,
-    "11/05": 6037832
-}
-
-
 
 function getObj(obj,keys){
     for(var key in obj){
@@ -60,7 +31,6 @@ class Dashboard extends React.Component {
     static getDerivedStateFromProps(nextProps, prevState) {
         if(nextProps.report.data){
             if(nextProps.report.data){
-                console.log(nextProps.report.data.line, 'data')
                  return{
                     report: nextProps.report.data,  
                     dataCircle: nextProps.report.data.circle,    
@@ -76,70 +46,35 @@ class Dashboard extends React.Component {
        
     }
 
-
-
-
-
-    // convertChart = () => {
-    //     const {dataCircle, dataLine} = this.state
-
-
-    //     console.log(dataCircle, "data circle")
-    //     console.log(dataLine, "data line")
-    //     const arrCircle = []
-    //     var keys = []
-    //     var arrLine = []
-
-
-    //     //convert circle
-    //     {dataCircle.map((item, idx) => {    
-    //         arrCircle.push({name: item.name, y : item.percent})
-    //     })}
-    //     this.setState({
-    //         circle: arrCircle
-    //     })
-
-
-    //     //convert line
-    //     getObj(dataLine,keys)  
-    //     {keys.map((itemKey,idx) => {
-    //         for( idx; idx < keys.length; ){
-    //             arrLine.push({x : new Date(itemKey), y : dataLine[itemKey]});
-    //             break;
-    //         }
-    //     })}
-    //     this.setState({
-    //         line: arrLine
-    //     })
-    
-
-    // }
     render(){
         const {dataCircle, dataLine} = this.state
-
+        // do dữ liệu api truyền về khác dữ liệu chart nhận để render nên phải convert trước
+    
         var arrCircle = []
         var keys = []
         var arrLine = []
-
-
         //convert circle
         {dataCircle.map((item, idx) => {    
-            arrCircle.push({name: item.name, y : item.percent})
+            arrCircle.push({name: item.name, y : item.percent})     // convert lại dữ liệu theo dạng { name : name , y : percent }
         })}
-        var stringDate = ""
+
+        //convert line từ {"07/06": 6869248} về dạng {x: Thu Jun 07 2001 00:00:00 GMT+0700 (Indochina Time), y: 6869248}
+        var stringDate = ""  // tạo một số string rỗng để chứa dữ liệu
         var stringMonth = ""
-        var stringAll = ""
-         //convert line
-        getObj(dataLine,keys)  
+        var stringAll = ""    
+        
+        getObj(dataLine,keys)  // ban đầu mình lấy các key của obj ra trước ( gọi hàm ở trên )
             {keys.map((itemKey,idx) => {
-                stringDate = itemKey.slice(0,2);
+                stringDate = itemKey.slice(0,2); //cắt lấy dữ liệu sau đó ghép lại theo cấu trúc tháng ngày (ban đầu là ngày tháng)
                 stringMonth = itemKey.slice(3,5);
                 stringAll = stringMonth + '/' + stringDate
                 for( idx; idx < keys.length; ){
-                    arrLine.push({x : new Date(stringAll), y : dataLine[itemKey]});
+                    arrLine.push({x : new Date(stringAll), y : dataLine[itemKey]}); // đưa về dạng date hoàn chỉnh vào add nó vào mảng
                     break;
             }
         })}    
+
+
          return(
             <Layout>
                 <DashboardPage 

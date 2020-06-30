@@ -7,7 +7,6 @@ import MaterialTable from 'material-table';
 const SMSPage = props => {
     const { smsData } = props
 
-
     const [state, setState] = React.useState({
         columns: [
         { title: 'Id', field: '_id' },
@@ -18,10 +17,8 @@ const SMSPage = props => {
         { title: 'Status', field: 'status' },
         { title: 'Note', field: 'note' },
         ],
-
-
-    });
-        
+    })
+    
     return(
     <Box p={5} width="100%">
         <MaterialTable
@@ -30,44 +27,40 @@ const SMSPage = props => {
                 data={smsData}
                 editable={{
                     // onRowAdd: (newData) =>
-                    // new Promise((resolve) => {
-                    //     setTimeout(() => {
-                    //     resolve();
-                    //     setState((prevState) => {
-                    //         const data = [...prevState.data];
-                    //         data.push(newData);
-                    //         return { ...prevState, data };
-                    //     });
-                    //     }, 600);
+                    //     new Promise((resolve) => {
+                    //         setTimeout(() => {
+                    //         resolve();
+                    //         setState((prevState) => {
+                    //             const data = [...prevState.data];
+                    //             data.push(newData);
+                    //             return { ...prevState, data };
+                    //         });
+                    //         }, 600);
                     // }),
 
                     onRowUpdate: (newData, oldData) =>
                     new Promise((resolve) => {
-                        console.log(newData, 'newdata');
-                        console.log(oldData, 'oldData');
-
-                         props.putSMSAction(newData);
+                        props.putSMSAction(newData); 
                         setTimeout(() => {
+                        props.reloadPage();
                         resolve();
-                       
+                        
                         if (oldData) {
-                            
-                            return  smsData ;
-                           
+                            return  smsData ;   
                         }
                         }, 600);
                     }),
                     // onRowDelete: (oldData) =>
                     // new Promise((resolve) => {
-                    //     console.log(oldData, 'del data')
-                    //     setTimeout(() => {
-                    //     resolve();
-                    //     setState((prevState) => {
-                    //         const data = [...prevState.data];
-                    //         data.splice(data.indexOf(oldData), 1);
-                    //         return { ...prevState, data };
-                    //     });
-                    //     }, 600);
+                    //     // console.log(oldData, 'del data')
+                    //     // setTimeout(() => {
+                    //     // resolve();
+                    //     // setState((prevState) => {
+                    //     //     const data = [...prevState.data];
+                    //     //     data.splice(data.indexOf(oldData), 1);
+                    //     //     return { ...prevState, data };
+                    //     // });
+                    //     // }, 600);
                     // }),
                 }}
             />  

@@ -118,7 +118,7 @@ export async function _delete(url, params) {
       method: 'delete',
       url: `${URL}/${url}`,
       headers,
-      withCredentials: true,
+      // withCredentials: true,
       data,
     };
     return await _results(_params);
