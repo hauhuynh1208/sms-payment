@@ -11,7 +11,9 @@ class Account extends React.Component {
         super(props)
         this.state={
             account: [],
-            accountMain : []
+            accountMain : [],
+            userInfo : JSON.parse(sessionStorage.getItem('userInfo')) || {}
+
         }
     }
 
@@ -39,6 +41,7 @@ class Account extends React.Component {
     }
 
     postAccount = (newData) => {
+        const {userInfo} = this.state
         var code = { 
             email: newData.email,
             password: '123456',
@@ -47,7 +50,7 @@ class Account extends React.Component {
             phone: newData.phone,
             address: newData.address       
         }
-       const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWYzMzg2YjUwM2FmNjc4NzJlNDcwY2EiLCJpYXQiOjE1OTI5OTk0NzAsImV4cCI6MTU5MzYwNDI3MH0.mxA0MeTvAl1OgTQzL0J6iObC7J-s4wVq-hFDJgPdIrE"
+       const token = userInfo.token
        var id = newData._id
        const params = {
            token,
@@ -63,6 +66,7 @@ class Account extends React.Component {
     }
 
     putAccount = (newData) => {
+        const {userInfo} = this.state
         var code = { 
             email: newData.email,
             password: newData.password,
@@ -71,7 +75,7 @@ class Account extends React.Component {
             phone: newData.phone,
             address: newData.address       
         }
-       const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWYzMzg2YjUwM2FmNjc4NzJlNDcwY2EiLCJpYXQiOjE1OTM0MTI0OTgsImV4cCI6MTU5NDAxNzI5OH0.0W-6r_6rcX7w8B43OhWMM-YA_34HhkJwcnHaEE0lzPo"
+       const token = userInfo.token
        var id = newData._id
        const params = {
            token,
@@ -87,7 +91,8 @@ class Account extends React.Component {
     }
 
     delAccount = (oldData) => {
-       const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWYzMzg2YjUwM2FmNjc4NzJlNDcwY2EiLCJpYXQiOjE1OTM0MTI0OTgsImV4cCI6MTU5NDAxNzI5OH0.0W-6r_6rcX7w8B43OhWMM-YA_34HhkJwcnHaEE0lzPo"
+       const {userInfo} = this.state
+       const token = userInfo
        var id = oldData._id
        const params = {
            token,

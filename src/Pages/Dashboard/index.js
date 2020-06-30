@@ -13,21 +13,6 @@ function getObj(obj,keys){
         }
     } 
 }
-const dataL = {
-"07/06/2020": 9869389,
-"08/06/2020": 9069389,
-"09/06/2020": 6869389,
-"10/06/2020": 9869389,
-"14/06/2020": 6942388,
-"21/06/2020": 3111535,
-"25/06/20": 9682301,
-"26/06/20": 9682301,
-"27/06/20": 9682301,
-"28/06/20": 9682301,
-"29/06/20": 8682301,
-"30/06/20": 6992301,
-"05/07/2020": 4914431
-}
 
 class Dashboard extends React.Component {
     constructor(props){
@@ -77,16 +62,17 @@ class Dashboard extends React.Component {
         var stringMonth = ""
         var stringAll = ""    
         
-        getObj(dataL,keys)  // ban đầu mình lấy các key của obj ra trước ( gọi hàm ở trên )
+        getObj(dataLine,keys)  // ban đầu mình lấy các key của obj ra trước ( gọi hàm ở trên )
             {keys.map((itemKey,idx) => {
                 stringDate = itemKey.slice(0,2); //cắt lấy dữ liệu sau đó ghép lại theo cấu trúc tháng ngày (ban đầu là ngày tháng)
                 stringMonth = itemKey.slice(3,5);
                 stringAll = stringMonth + '/' + stringDate
                 for( idx; idx < keys.length; ){
-                    arrLine.push({x : new Date(stringAll), y : dataL[itemKey]}); // đưa về dạng date hoàn chỉnh vào add nó vào mảng
+                    arrLine.push({x : new Date(stringAll), y : dataLine[itemKey]}); // đưa về dạng date hoàn chỉnh vào add nó vào mảng
                     break;
             }
-        })}    
+        })}   
+        console.log(arrLine, 'data line') 
 
 
          return(
@@ -101,7 +87,6 @@ class Dashboard extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state, 'state')
     return {
         report: state.report
     };

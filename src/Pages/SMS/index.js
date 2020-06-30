@@ -11,6 +11,7 @@ class SMS extends React.Component {
        super(props)
        this.state = {
            sms : [],
+           userInfo : JSON.parse(sessionStorage.getItem('userInfo')) || {}
        }
    }
   
@@ -36,14 +37,14 @@ class SMS extends React.Component {
       }
 
     putSMS = (newData) => {
+        const {userInfo} = this.state
         var code = { 
             "status": newData.status,
             "note": newData.note   
         }
         var id = newData._id
 
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWYzMzg2YjUwM2FmNjc4NzJlNDcwY2EiLCJpYXQiOjE1OTI5OTk0NzAsImV4cCI6MTU5MzYwNDI3MH0.mxA0MeTvAl1OgTQzL0J6iObC7J-s4wVq-hFDJgPdIrE"
-
+        const token = userInfo.token
         const params = {
            token,
            body: code

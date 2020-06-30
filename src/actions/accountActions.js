@@ -2,12 +2,9 @@ import actionConstants from '../actionConstants'
 import {get, post} from './RequestAdapter'
 import {history} from '../utils/history'
 
-
-
 export default {
     login
 }
-
 
 function login({email, password}) {
     return async (dispatch)=>{

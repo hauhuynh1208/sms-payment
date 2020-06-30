@@ -70,6 +70,8 @@ const dataL = {
     "05/07": 4914431
     }
 
+
+const dataNo = {x: "", y: 8475436} 
 const DashboardPage = props => {
     
        const {dataCircle, dataLine} = props
@@ -163,10 +165,13 @@ const DashboardPage = props => {
                 const date = new Date(item.x);
                 const monthData = date.getMonth();
                 const yearData = date.getYear()
-                if((monthData == (currentMonth + 1))){
+                if((monthData == (currentMonth - 1))){
                     line.push(item)   
                 }
             })}
+            if(line.length == 0){
+                line.push(dataNo)
+            }
             return line
            }
         }
@@ -189,7 +194,6 @@ const DashboardPage = props => {
                 dataPoints: dataCircle
 			}]
         }
-        var dd = 6
 
         const options2 = {
 			animationEnabled: true,
@@ -200,7 +204,7 @@ const DashboardPage = props => {
 				valueFormatString: "DD/MM"
 			},
 			axisY: {
-				title: "Sales (in USD)",
+				title: "Revenue (USD)",
 				prefix: "$",
 				includeZero: false
 			},
