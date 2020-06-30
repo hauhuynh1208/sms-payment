@@ -24,6 +24,7 @@ class Account extends React.Component {
              account: nextProps.accountUser.data.children
            }
         }  
+        return 0 
     }
     componentDidMount(){
         this.props.accountUserActions.getAccountAction();

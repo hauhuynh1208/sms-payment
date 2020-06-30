@@ -20,6 +20,7 @@ class SMS extends React.Component {
                 sms: nextProps.sms.data
             }
         }  
+        return 0 
     }
 
    async componentDidMount(){
@@ -29,9 +30,9 @@ class SMS extends React.Component {
     componentDidUpdate(previousProps, previousState, snapshot) {
         if(this.state.sms != previousState.sms){
             return{
-                 sms :  previousState.sms,
+                 sms: previousState.sms,
             }
-        }
+        }        
       }
 
     putSMS = (newData) => {
@@ -72,7 +73,7 @@ class SMS extends React.Component {
 
 function mapStateToProps(state) {
     return {
-      sms: state.sms
+      sms: state.sms,
     };
   }
 

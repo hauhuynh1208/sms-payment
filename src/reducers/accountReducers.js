@@ -15,6 +15,7 @@ export default (state = initState, action) => {
         _state.loading = false;
         return _state;
       case actionConstants.LOGIN_SUCCESS:
+        console.log(_state, 'state login')
         _state.userInfo = action.data;
         return _state;
       case actionConstants.LOGIN_FAILURE:

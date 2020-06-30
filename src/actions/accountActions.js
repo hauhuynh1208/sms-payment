@@ -20,6 +20,7 @@ function login({email, password}) {
           };
         await post('login', params).then(resp=>{
                 sessionStorage.setItem('userInfo', JSON.stringify(resp.data));
+                console.log(resp, 'token data')
                 dispatch({
                     type: actionConstants.LOGIN_SUCCESS,
                     data: resp.data

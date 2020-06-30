@@ -22,7 +22,6 @@ const Layout = props =>{
     const handleListItemClick = (index) => {
         setSelectedIndex(index);
         x = index
-        console.log(index,'set')
       };
 
 

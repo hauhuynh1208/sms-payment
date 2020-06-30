@@ -54,36 +54,21 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 //     createData('Tiền mặt Kế toán', 30000000, 5220000, 20000000, 30000000),
 //   ];
   
-
-
-const data = {
-    "circle": [
-        {
-            "name": "Vietcombank",
-            "code": "VCB",
-            "percent": 70
-        },
-        {
-            "name": "Acb",
-            "code": "ACB",
-            "percent": 20
-        },
-        {
-            "name": "Other",
-            "code": "OTHER",
-            "percent": 10
-        }
-    ],
-    "line": {
-        "07/06": 6869248,
-        "14/06": 9576031,
-        "21/06": 4328985,
-        "28/06": 6290117,
-        "05/07": 4638263
-    }
-}
-
 var val = 10
+
+
+const dataL = {
+    "07/06": 9869389,
+    "08/06": 9069389,
+    "09/06": 6869389,
+    "10/06": 9869389,
+    "14/06": 6942388,
+    "21/06": 3111535,
+    "28/06": 9682301,
+    "29/06": 8682301,
+    "30/06": 6992301,
+    "05/07": 4914431
+    }
 
 const DashboardPage = props => {
     
@@ -204,6 +189,7 @@ const DashboardPage = props => {
                 dataPoints: dataCircle
 			}]
         }
+        var dd = 6
 
         const options2 = {
 			animationEnabled: true,
@@ -211,10 +197,10 @@ const DashboardPage = props => {
 				// text: "Monthly Sales - 2017"
 			},
 			axisX: {
-				valueFormatString: "MMM"
+				valueFormatString: "DD/MM"
 			},
 			axisY: {
-				// title: "Sales (in USD)",
+				title: "Sales (in USD)",
 				prefix: "$",
 				includeZero: false
 			},
