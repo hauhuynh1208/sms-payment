@@ -17,8 +17,6 @@ function getReportAction(){
             return dispatch({
                 type: actionConstants.GET_SUCCESS_REPORT,
                 data: res.data,
-                
-            
             })
         })
         .catch(error => {

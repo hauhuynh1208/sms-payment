@@ -92,7 +92,7 @@ class Account extends React.Component {
 
     delAccount = (oldData) => {
        const {userInfo} = this.state
-       const token = userInfo
+       const token = userInfo.token
        var id = oldData._id
        const params = {
            token,

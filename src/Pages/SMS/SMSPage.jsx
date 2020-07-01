@@ -25,6 +25,34 @@ const SMSPage = props => {
                 title="Manager SMS"
                 columns={state.columns}
                 data={smsData}
+                options={{
+                    headerStyle: {
+                        borderWidth: 1,
+                        borderRightWidth: 1,
+                        borderLeftWidth: 1,
+                        borderBottomWidth: 1,
+                        borderTopWidth: 1,
+                        borderColor: '#f2f2f2',
+                        borderStyle: 'solid',
+                        backgroundColor: '#00a3a3',
+                        color: 'white'
+                    },
+                    cellStyle: {
+                        borderWidth: 0,
+                        borderLeftWidth: 1,
+                        borderRightWidth: 1,
+                        borderBottomWidth: 1,
+                        borderColor: '#f2f2f2',
+                        borderStyle: 'solid',
+                      },
+                  }}
+                  localization={{
+                  
+                    toolbar: {
+                        nRowsSelected: 10
+                    },
+                
+                }}
                 editable={{
                     // onRowAdd: (newData) =>
                     //     new Promise((resolve) => {

@@ -23,8 +23,6 @@ class Dashboard extends React.Component {
             dataLine: {},
             report: [],
         }
-        
-     
     } 
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -36,7 +34,6 @@ class Dashboard extends React.Component {
                     dataLine: nextProps.report.data.line,
                 }
             }
-            
         }  
         return 0 
     }
@@ -72,8 +69,6 @@ class Dashboard extends React.Component {
                     break;
             }
         })}   
-        console.log(arrLine, 'data line') 
-
 
          return(
             <Layout>

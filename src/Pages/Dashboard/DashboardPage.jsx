@@ -56,26 +56,11 @@ var CanvasJSChart = CanvasJSReact.CanvasJSChart;
   
 var val = 10
 
-
-const dataL = {
-    "07/06": 9869389,
-    "08/06": 9069389,
-    "09/06": 6869389,
-    "10/06": 9869389,
-    "14/06": 6942388,
-    "21/06": 3111535,
-    "28/06": 9682301,
-    "29/06": 8682301,
-    "30/06": 6992301,
-    "05/07": 4914431
-    }
-
-
 const dataNo = {x: "", y: 8475436} 
 const DashboardPage = props => {
     
        const {dataCircle, dataLine} = props
-
+        
         const [age, setAge] = React.useState(10); 
         var line = []
        

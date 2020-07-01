@@ -16,3 +16,36 @@ body {
 .canvasjs-chart-credit{
   display: none;
 }
+
+/* material cell root */
+
+.MuiTableCell-root{
+  border-bottom: 1px solid rgba(224, 224, 224, 1) !important;
+}
+/* .MTableToolbar-root-36{
+  color: white;
+  background-color: #00a3a3;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.MTableToolbar-root-29{
+  color: white;
+  background-color: #00a3a3;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.MuiInputAdornment-positionStart{
+  color: white !important
+}
+.MuiInputBase-inputAdornedStart{
+  color: white !important
+}
+.MTableToolbar-actions-39 .MuiIconButton-label{
+  color: white !important
+}
+.Mui-disabled .MuiIconButton-label{
+  color: white !important
+}
+.MuiInput-underline:before {
+   border-bottom: 1px solid white !important
+} */
