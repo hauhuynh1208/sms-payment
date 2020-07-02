@@ -88,7 +88,7 @@ const DashboardPage = (props) => {
   return (
     <Layout>
       <Box className={classes.root__dashboard}>
-        <Box pb={5} display="flex" justifyContent="space-between">
+        <Box pb={5} display="flex" justifyContent="flex-end">
           <Box>
             <FormControl variant="outlined" className={classes.form__chart}>
               <InputLabel id="select-time-label">

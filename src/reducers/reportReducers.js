@@ -6,7 +6,7 @@ const initState = {
   error: '',
 };
 
-const getReportReducer = (state = initState, action) => {
+export default (state = initState, action) => {
   var _state = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case actionConstants.START_QUERY:
@@ -25,8 +25,4 @@ const getReportReducer = (state = initState, action) => {
     default:
       return _state;
   }
-};
-
-export const reportReducers = {
-  getReportReducer,
 };
