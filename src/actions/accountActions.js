@@ -16,8 +16,7 @@ function login({email, password}) {
             },
           };
         await post('login', params).then(resp=>{
-                sessionStorage.setItem('userInfo', JSON.stringify(resp.data));
-                console.log(resp, 'token data')
+            localStorage.setItem('userInfo', JSON.stringify(resp.data))
                 dispatch({
                     type: actionConstants.LOGIN_SUCCESS,
                     data: resp.data

@@ -12,7 +12,7 @@ class Account extends React.Component {
         this.state={
             account: [],
             accountMain : [],
-            userInfo : JSON.parse(sessionStorage.getItem('userInfo')) || {}
+            userInfo : JSON.parse(localStorage.getItem('userInfo')) || {}
 
         }
     }

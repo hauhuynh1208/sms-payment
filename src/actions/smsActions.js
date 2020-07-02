@@ -24,7 +24,7 @@ function getSMSActionAll(){
                 type: actionConstants.END_QUERY,
             });
             return dispatch({
-                type: actionConstants. GET_FAILURE_SMS,
+                type: actionConstants.GET_FAILURE_SMS,
                 data: error.message,            
             })
         })

@@ -11,7 +11,7 @@ class SMS extends React.Component {
        super(props)
        this.state = {
            sms : [],
-           userInfo : JSON.parse(sessionStorage.getItem('userInfo')) || {}
+           userInfo : JSON.parse(localStorage.getItem('userInfo')) || {}
        }
    }
   

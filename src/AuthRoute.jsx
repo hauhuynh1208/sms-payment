@@ -31,7 +31,7 @@ const PrivilegeComponent = ({ component: Component, props, rest }) => {
 };
 
 export default ({ component: Component, ...rest }) => {
-  const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
   return (
     <Route
       {...rest}

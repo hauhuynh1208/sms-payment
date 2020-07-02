@@ -27,7 +27,7 @@ function getAccountAction(){
                 type: actionConstants.END_QUERY,
             });
             return dispatch({
-                type: actionConstants. GET_FAILURE_ACCOUNT,
+                type: actionConstants.GET_FAILURE_ACCOUNT,
                 data: error.message,            
             })
         })
