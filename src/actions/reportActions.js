@@ -1,34 +1,34 @@
-import  actionConstants  from '../actionConstants'
-import axios from 'axios';
-import { URL, headers } from '../utils/config';
+import actionConstants from '../actionConstants';
+import { get } from './RequestAdapter';
 
-export const reportActions =  {
-    getReportAction
-} 
+export const reportActions = {
+  getReports,
+};
 
-function getReportAction(){
-    return(dispatch, getState) => {
-        dispatch({type: actionConstants.START_QUERY});
-        axios.get(`${URL}/report?_t=w`, headers)
-        .then(res => {
-            dispatch({
-                type: actionConstants.END_QUERY
-            });
-            return dispatch({
-                type: actionConstants.GET_SUCCESS_REPORT,
-                data: res.data,
-            })
-        })
-        .catch(error => {
-            dispatch({
-                type: actionConstants.END_QUERY,
-            });
-            return dispatch({
-                type: actionConstants. GET_FAILURE_REPORT,
-                data: error.message,            
-            })
-        })
-    }
+function getReports(token, _t = 'w') {
+  return async (dispatch, getState) => {
+    dispatch({ type: actionConstants.START_QUERY });
+    const params = {
+      token,
+    };
+    await get(`report?_t=${_t}`, params)
+      .then((resp) => {
+        dispatch({
+          type: actionConstants.GET_SUCCESS_REPORT,
+          data: resp.data,
+        });
+        return dispatch({
+          type: actionConstants.END_QUERY,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: actionConstants.GET_FAILURE_REPORT,
+          data: error.message,
+        });
+        return dispatch({
+          type: actionConstants.END_QUERY,
+        });
+      });
+  };
 }
-
-

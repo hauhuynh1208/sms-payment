@@ -22,7 +22,7 @@ export async function get(url, params) {
       method: 'get',
       url: `${URL}/${url}`,
       headers,
-      withCredentials: true,
+      // withCredentials: true,
       data,
     };
 

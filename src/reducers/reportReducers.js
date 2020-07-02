@@ -1,14 +1,26 @@
-import actionConstants from '../actionConstants'
+import actionConstants from '../actionConstants';
 
-const getReportReducer = (state = [], action) => {
+const initState = {
+  loading: false,
+  reports: [],
+  error: '',
+};
 
-var _state = JSON.parse(JSON.stringify(state));
-
+const getReportReducer = (state = initState, action) => {
+  var _state = JSON.parse(JSON.stringify(state));
   switch (action.type) {
+    case actionConstants.START_QUERY:
+      _state.loading = true;
+      _state.error = '';
+      return _state;
+    case actionConstants.END_QUERY:
+      _state.loading = false;
+      return _state;
     case actionConstants.GET_SUCCESS_REPORT:
-      _state = action.data;
+      _state.reports = action.data;
       return _state;
     case actionConstants.GET_FAILURE_REPORT:
+      _state.error = action.data;
       return _state;
     default:
       return _state;
@@ -16,5 +28,5 @@ var _state = JSON.parse(JSON.stringify(state));
 };
 
 export const reportReducers = {
-  getReportReducer
-}
+  getReportReducer,
+};

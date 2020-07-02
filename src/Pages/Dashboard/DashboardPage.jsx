@@ -1,248 +1,123 @@
-import React from 'react'
-import CanvasJSReact from '../../assets/canvasjs.react';
+import React from 'react';
 import {
-    Box,
-    Typography,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-    TableContainer, 
-    Table, 
-    TableHead, 
-    TableRow, 
-    TableCell, 
-    TableBody,
-    Paper
-  } from '@material-ui/core'
-import { useTheme } from '@material-ui/core/styles'
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@material-ui/core';
 
-import styles from './style'
-import colors from '../../styles/colors'
+import styles from './style';
+import { Doughnut, Line } from 'react-chartjs-2';
+import colors from '../../styles/colors';
+import Layout from '../../components/Layout';
+import dummy from './example';
 
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+const DashboardPage = (props) => {
+  const [time, setTime] = React.useState('w');
 
-// const StyledTableCell = withStyles((theme) => ({
-//     head: {
-//       backgroundColor: colors.gray,
-//       color: theme.palette.common.white,
-//     },
-//     body: {
-//       fontSize: 14,
-//     },
-//   }))(TableCell);
+  const handleChange = (event) => {
+    props.onChangeTime(event.target.value);
+    setTime(event.target.value);
+  };
 
-//   const StyledTableRow = withStyles((theme) => ({
-//     root: {
-//       '&:nth-of-type(odd)': {
-//         backgroundColor: theme.palette.action.hover,
-//       },
-//     },
-//   }))(TableRow);
-  
-  
-// function createData(name, calories, fat, carbs, protein) {
-//     return { name, calories, fat, carbs, protein };
-//   }
-  
-//   const rows = [
-//     createData('Vietcombank-Bank1', 10000000, 5000000, 20000000, 30000000),
-//     createData('Vietcombank-Bank2', 12000000, 5300000, 23500000, 31000000),
-//     createData('Techcombank-Bank1', 10000000, 5000000, 20040000, 30000000),
-//     createData('Tiền mặt - kết toán', 20000000, 4100000, 20000000, 30000000),
-//     createData('Tiền mặt Kế toán', 30000000, 5220000, 20000000, 30000000),
-//   ];
-  
-var val = 10
+  const formatDoughnutData = (data = dummy) => {
+    const doughnutData = dummy.filter((d) => d.type === 'doughnut')[0].data;
+    const labels = [];
+    doughnutData.map((d) => {
+      labels.push(d.name);
+    });
+    const values = [];
+    doughnutData.map((d) => {
+      values.push(d.percent);
+    });
+    const _data = {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Banks',
+          data: values,
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+          hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+        },
+      ],
+    };
+    return _data;
+  };
 
-const dataNo = {x: "", y: 8475436} 
-const DashboardPage = props => {
-    
-       const {dataCircle, dataLine} = props
-        
-        const [age, setAge] = React.useState(10); 
-        var line = []
-       
-        const handleChange = (event) => {
-          setAge(event.target.value);
-           val = event.target.value
-          formatData(event.target.value)
-         
-          
-        };
-       
-        const formatData = (val) => {
-            var d = new Date();
-            var currentDate = d.getDate(); //lấy ngày hiện tại
-            var currentMonth = d.getMonth(); // lấy tháng hiện tại
-            var currentYear = d.getYear(); //lấy năm hiện tại
-            if(val == 10){
-                if(currentDate >= 1 && currentDate <= 6 ){
-                    {dataLine.map((item, idx) => {    
-                        const date = new Date(item.x); //này là covert lại ban đầu để lấy ra ngày tháng hoặc năm CỦA TỪNG DỮ LIỆU để đi so sánh
-                        const dateData = date.getDate(); // Này là lấy ra ngày  
-                        const montData = date.getMonth() // Này là lấy ra tháng 
-                        const yearData = date.getYear()  // // Này là lấy ra năm
-                        if((dateData >= 1 && dateData <= 6 ) && (currentMonth == montData)){ // so sánh xem nếu có dữ liệu nào nằm trong khoảng này thì lấy ra
-                            line.push(item)
-                        }
-                    
-                    })}
-                    
-                    return line
-                }
-                else if(d >= 7 && d <= 14 ){
-                    {dataLine.map((item, idx) => {    
-                        const date = new Date(item.x);
-                        const dateData = date.getDate();
-                        const montData = date.getMonth()
-                        const yearData = date.getYear()
-                        if((dateData >= 7 && dateData <= 14) && (currentMonth == montData)){ 
-                            line.push(item)
-                        }
-                    
-                    })}
-                    
-                    return line
-                    
-                }
-                else if(d >= 15 && d <= 22 ){
-                    {dataLine.map((item, idx) => {    
-                        const date = new Date(item.x);
-                        const dateData = date.getDate();
-                        const montData = date.getMonth()
-                        const yearData = date.getYear()
-                        if(dateData >= 15 && dateData <= 22){
-                            line.push(item)
-                        }
-                    
-                    })}
-            
-                    return line
-                }
-                else{
-                {dataLine.map((item, idx) => {    
-                        const date = new Date(item.x);
-                        const dateData = date.getDate();
-                        const montData = date.getMonth()
-                        const yearData = date.getYear()   
-                        if((dateData >= 23 && dateData <= 31) && (currentMonth == montData)){
-                            line.push(item)
-                        }
-                    })}      
-                    return line
-                }
-          }
-          if(val == 20){
-            {dataLine.map((item, idx) => {    
-                const date = new Date(item.x);
-                const monthData = date.getMonth();
-                const yearData = date.getYear()
-                if((monthData == currentMonth)){
-                    line.push(item)
-                }         
-            })}
-            return line
-          }
-          if(val == 30){
-            {dataLine.map((item, idx) => {    
-                const date = new Date(item.x);
-                const monthData = date.getMonth();
-                const yearData = date.getYear()
-                if((monthData == (currentMonth - 1))){
-                    line.push(item)   
-                }
-            })}
-            if(line.length == 0){
-                line.push(dataNo)
-            }
-            return line
-           }
-        }
-        const options1 = {
-			animationEnabled: true,
-			title: {
-				// text: "Customer Satisfaction"
-            },
-			subtitles: [{
-				text: "Banking",
-				verticalAlign: "center",
-				fontSize: 24,
-				dockInsidePlotArea: true
-            }],
-			data: [{
-				type: "doughnut",
-				showInLegend: true,
-				indexLabel: "{name}: {y}",
-				yValueFormatString: "#,###'%'",
-                dataPoints: dataCircle
-			}]
-        }
+  const formatLineData = (data = dummy) => {
+    const lineData = dummy.filter((d) => d.type === 'line')[0].data;
+    const labels = [];
+    lineData.map((d) => {
+      labels.push(d.time);
+    });
+    const values = [];
+    lineData.map((d) => {
+      values.push(d.value);
+    });
+    const _data = {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Value',
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: 'rgba(75,192,192,0.4)',
+          borderColor: 'rgba(75,192,192,1)',
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: 'rgba(75,192,192,1)',
+          pointBackgroundColor: '#fff',
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
+          pointHoverBorderColor: 'rgba(220,220,220,1)',
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data: values,
+        },
+      ],
+    };
+    return _data;
+  };
 
-        const options2 = {
-			animationEnabled: true,
-			title:{
-				// text: "Monthly Sales - 2017"
-			},
-			axisX: {
-				valueFormatString: "DD/MM"
-			},
-			axisY: {
-				title: "Revenue (USD)",
-				prefix: "$",
-				includeZero: false
-			},
-			data: [{
-				yValueFormatString: "$#,###",
-                xValueFormatString: "MMMM",
-                type: "spline",
-                showInLegend: true,
-                dataPoints: formatData(val),            
-			}],
-        }
-    
-        const classes  = styles()
-        return(
-                <Box className={classes.root__dashboard}>
-                    <Box pb={5} display="flex" justifyContent="space-between">
-                        <Box>
-                        </Box>
-                        <Box>
-                        <FormControl variant="outlined" className={classes.form__chart}>
-                            <InputLabel id="demo-simple-select-outlined-label">Hiển thị doanh số theo</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                value={age}
-                                onChange={handleChange}
-                                label="Hiển thị doanh số theo"
-                            >
-                         
-                                <MenuItem value={10} >Hiển thị theo tuần này</MenuItem>
-                                <MenuItem value={20}>Hiển thị theo tháng này</MenuItem>
-                                <MenuItem value={30}>Hiển thị theo tháng trước</MenuItem>
-                            </Select>
-                        </FormControl>
-                        </Box>
-                    </Box>
-                    <Box className={classes.chart__dashboard}>
-                        <Box width="35%">
-                            <CanvasJSChart options = {options1} 
-                                // onRef={ref => this.chart = ref} 
-                                className={classes.chart__point}
-                            />
-                            <Box className={classes.mask__trialVersion}></Box>
-                        </Box>
-                        <Box width="60%" > 
-                            <CanvasJSChart options = {options2} 
-                                /* onRef={ref => this.chart = ref} */
-                            />
-                            <Box className={classes.mask__trialVersion}></Box>
-                        </Box>
-                    </Box>
-                   
-                    {/* <TableContainer component={Paper}>
+  const classes = styles();
+  return (
+    <Layout>
+      <Box className={classes.root__dashboard}>
+        <Box pb={5} display="flex" justifyContent="space-between">
+          <Box>
+            <FormControl variant="outlined" className={classes.form__chart}>
+              <InputLabel id="select-time-label">
+                Hiển thị doanh số theo
+              </InputLabel>
+              <Select
+                labelId="select-time-label"
+                id="select-time"
+                value={time}
+                onChange={handleChange}
+                label="Hiển thị doanh số theo"
+              >
+                <MenuItem value="d">Hiển thị theo hôm nay</MenuItem>
+                <MenuItem value="w">Hiển thị theo tuần này</MenuItem>
+                <MenuItem value="m">Hiển thị theo tháng này</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+        </Box>
+        <Box className={classes.chart__dashboard}>
+          <Box width="35%">
+            <Doughnut data={formatDoughnutData(props.reports)} />
+          </Box>
+          <Box width="65%">
+            <Line data={formatLineData(props.reports)} />
+          </Box>
+        </Box>
+
+        {/* <TableContainer component={Paper}>
                         <Table className={classes.table} aria-label="customized table">
                             <TableHead>
                             <TableRow>
@@ -268,11 +143,8 @@ const DashboardPage = props => {
                             </TableBody>
                         </Table>
                     </TableContainer> */}
-                </Box>
-  
-        )
-    
-}
-export default DashboardPage
-
-
+      </Box>
+    </Layout>
+  );
+};
+export default DashboardPage;

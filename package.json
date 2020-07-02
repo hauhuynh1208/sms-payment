@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.10.2",
+    "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/pickers": "^3.2.10",
@@ -15,8 +15,9 @@
     "canvasjs": "^1.8.3",
     "chart.js": "^2.9.3",
     "clsx": "^1.1.1",
-    "material-table": "^1.61.0",
+    "material-table": "^1.63.1",
     "react": "^16.13.1",
+    "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
@@ -45,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
   }
 }
