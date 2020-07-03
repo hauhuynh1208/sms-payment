@@ -3,7 +3,6 @@ body {
   margin: 0px;
 }
 
-
 /* action side bar */
 /* .MuiListItem-root.Mui-selected, .MuiListItem-root.Mui-selected:hover {
   background-color: #00a3a3 !important;
@@ -13,13 +12,13 @@ body {
   background-color: #00a3a3 !important;
   border-radius: 5px !important;
 }
-.canvasjs-chart-credit{
+.canvasjs-chart-credit {
   display: none;
 }
 
 /* material cell root */
 
-.MuiTableCell-root{
+.MuiTableCell-root {
   border-bottom: 1px solid rgba(224, 224, 224, 1) !important;
 }
 /* .MTableToolbar-root-36{
@@ -48,4 +47,13 @@ body {
 }
 .MuiInput-underline:before {
    border-bottom: 1px solid white !important
+} */
+
+/* .MuiBox-root .MuiBox-root-77 .chartjs-render-monitor {
+  width: 736px !important;
+  height: 360px !important;
+  margin-left: -150px;
+}
+.MuiBox-root .MuiBox-root-79 .chartjs-render-monitor {
+  margin-left: -50px;
 } */

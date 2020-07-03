@@ -44,6 +44,7 @@ function editSMS(token, { _id, status, note }) {
         note,
       },
     };
+    console.log(params, 'sms');
     await put(`sms/${_id}`, params)
       .then((resp) => {
         dispatch({

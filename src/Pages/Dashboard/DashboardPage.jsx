@@ -9,20 +9,22 @@ import {
 
 import styles from './style';
 import { Doughnut, Line } from 'react-chartjs-2';
-import colors from '../../styles/colors';
 import Layout from '../../components/Layout';
-import dummy from './example';
+
+var x = 'd';
 
 const DashboardPage = (props) => {
-  const [time, setTime] = React.useState('w');
+  const { reports } = props;
+  const [time, setTime] = React.useState(x);
 
   const handleChange = (event) => {
     props.onChangeTime(event.target.value);
     setTime(event.target.value);
+    x = event.target.value;
   };
 
-  const formatDoughnutData = (data = dummy) => {
-    const doughnutData = dummy.filter((d) => d.type === 'doughnut')[0].data;
+  const formatDoughnutData = (data = reports) => {
+    const doughnutData = reports.filter((d) => d.type === 'doughnut')[0].data;
     const labels = [];
     doughnutData.map((d) => {
       labels.push(d.name);
@@ -45,8 +47,8 @@ const DashboardPage = (props) => {
     return _data;
   };
 
-  const formatLineData = (data = dummy) => {
-    const lineData = dummy.filter((d) => d.type === 'line')[0].data;
+  const formatLineData = (data = reports) => {
+    const lineData = reports.filter((d) => d.type === 'line')[0].data;
     const labels = [];
     lineData.map((d) => {
       labels.push(d.time);
@@ -109,8 +111,16 @@ const DashboardPage = (props) => {
           </Box>
         </Box>
         <Box className={classes.chart__dashboard}>
-          <Box width="35%">
-            <Doughnut data={formatDoughnutData(props.reports)} />
+          <Box width="30%">
+            <Doughnut
+              data={formatDoughnutData(props.reports)}
+              height={280}
+              // options={
+
+              //     // maintainAspectRatio: false,
+
+              // }
+            />
           </Box>
           <Box width="65%">
             <Line data={formatLineData(props.reports)} />

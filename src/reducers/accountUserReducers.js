@@ -1,61 +1,48 @@
-import actionConstants from '../actionConstants'
+import actionConstants from '../actionConstants';
+const initState = {
+  loading: false,
+  accountUser: [],
+  getAllAccountError: '',
+  isPosted: false,
+  isEdited: false,
+  isDeleted: false,
+};
 
-  const getAccountReducer = (state = [], action) => {
-    var _state = JSON.parse(JSON.stringify(state));
-    switch (action.type) {
-      case actionConstants.GET_SUCCESS_ACCOUNT:
-        _state = action.data;
-        return _state;
-      case actionConstants.GET_FAILURE_ACCOUNT:
-        return _state;
-      default:
-        return _state;
-    }
-  };
-
-  const postAccountReducer = (state = [], action) => {
-    var _state = JSON.parse(JSON.stringify(state));
-    switch (action.type) {
-      case actionConstants.POST_SUCCESS_ACCOUNT:
-        _state = action.data;
-        return _state;
-      case actionConstants.POST_FAILURE_ACCOUNT:
-        return _state;
-      default:
-        return _state;
-    }
-  };
-
-  const putAccountReducer = (state = [], action) => {
-    var _state = JSON.parse(JSON.stringify(state));
-    switch (action.type) {
-      case actionConstants.PUT_SUCCESS_ACCOUNT_DETAIL:
-        _state = action.data;
-        return _state;
-      case actionConstants.PUT_FAILURE_ACCOUNT_DETAIL:
-        return _state;
-      default:
-        return _state;
-    }
-  };
-
-  const delAccountReducer = (state = [], action) => {
-    var _state = JSON.parse(JSON.stringify(state));
-    switch (action.type) {
-      case actionConstants.DEL_SUCCESS_ACCOUNT_DETAIL:
-        _state = action.data;
-        return _state;
-      case actionConstants.DEL_FAILURE_ACCOUNT_DETAIL:
-        return _state;
-      default:
-        return _state;
-    }
-  };
-
-export const accountUserReducers = {
-  getAccountReducer,
-  postAccountReducer,
-  putAccountReducer,
-  delAccountReducer
-
-}
+export default (state = initState, action) => {
+  const _state = JSON.parse(JSON.stringify(state));
+  switch (action.type) {
+    case actionConstants.START_QUERY:
+      _state.loading = true;
+      _state.getAllAccountError = '';
+      _state.isPosted = false;
+      _state.isEdited = false;
+      _state.isDeleted = false;
+      return _state;
+    case actionConstants.END_QUERY:
+      _state.loading = false;
+      _state.isPosted = false;
+      _state.isEdited = false;
+      _state.isDeleted = false;
+      return _state;
+    case actionConstants.GET_ACCOUNT_SUCCESS:
+      _state.accountUser = action.data;
+      return _state;
+    case actionConstants.GET_ACCOUNT_FAILURE:
+      _state.getAllAccountError = action.data;
+      return _state;
+    case actionConstants.POST_ACCOUNT_SUCCESS:
+      _state.isPosted = true;
+    case actionConstants.POST_ACCOUNT_FAILURE:
+      _state.postAccountError = action.data;
+    case actionConstants.EDIT_ACCOUNT_SUCCESS:
+      _state.isEdited = true;
+    case actionConstants.EDIT_ACCOUNT_FAILURE:
+      _state.editAccountError = action.data;
+    case actionConstants.DEL_ACCOUNT_SUCCESS:
+      _state.isDeleted = true;
+    case actionConstants.DEL_ACCOUNT_FAILURE:
+      _state.delAccountError = action.data;
+    default:
+      return _state;
+  }
+};

@@ -13,6 +13,7 @@ function getReports(token, _t = 'w') {
     };
     await get(`report?_t=${_t}`, params)
       .then((resp) => {
+        console.log(resp, 'reps');
         dispatch({
           type: actionConstants.GET_SUCCESS_REPORT,
           data: resp.data,

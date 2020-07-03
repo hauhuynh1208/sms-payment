@@ -1,112 +1,76 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import AccountPage from './AccountPage';
-import { accountUserActions } from '../../actions/accountUserActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { put, post, _delete } from '../../actions/RequestAdapter';
+import { accountUserActions } from '../../actions/accountUserActions';
 
 class Account extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: false,
       account: [],
       accountMain: [],
+      isPosted: false,
+      isEdited: false,
+      isDeleted: false,
       userInfo: JSON.parse(localStorage.getItem('userInfo')) || {},
     };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.accountUser.data) {
-      var arr = [];
-      arr.push(nextProps.accountUser.data);
-      return {
-        accountMain: arr,
-        account: nextProps.accountUser.data.children,
-      };
+    let state = {
+      errors: prevState.errors,
+    };
+
+    if (nextProps.accountUser.loading !== prevState.loading) {
+      state.loading = nextProps.accountUser.loading;
     }
-    return 0;
+    if (nextProps.accountUser.accountUser !== prevState.accountUser) {
+      var arrMain = [];
+      arrMain.push(nextProps.accountUser.accountUser);
+      state.accountMain = arrMain;
+      state.account = nextProps.accountUser.accountUser.children;
+    }
+    if (nextProps.accountUser.isPosted !== prevState.isPosted) {
+      state.isPosted = nextProps.accountUser.isPosted;
+    }
+    if (nextProps.accountUser.isEdited !== prevState.isEdited) {
+      state.isEdited = nextProps.accountUser.isEdited;
+    }
+    if (nextProps.accountUser.isDeleted !== prevState.isDeleted) {
+      state.isDeleted = nextProps.accountUser.isDeleted;
+    }
+    return Object.keys(state).length ? state : null;
   }
   componentDidMount() {
-    this.props.accountUserActions.getAccountAction();
+    const { token } = this.state.userInfo;
+    this.props.accountUserActions.getAccount(token);
   }
 
   componentDidUpdate(previousProps, previousState, snapshot) {
-    if (this.state.account != previousState.accountUser) {
-      return {
-        account: previousState.accountUser,
-      };
+    const { accountUser } = this.props;
+    if (accountUser.isEdited || accountUser.isPosted || accountUser.isDeleted) {
+      const { token } = this.state.userInfo;
+      this.props.accountUserActions.getAccount(token);
     }
   }
 
-  postAccount = (newData) => {
-    const { userInfo } = this.state;
-    var code = {
-      email: newData.email,
-      password: '123456',
-      firstname: newData.firstname,
-      lastname: newData.lastname,
-      phone: newData.phone,
-      address: newData.address,
-    };
-    const token = userInfo.token;
-    var id = newData._id;
-    const params = {
-      token,
-      body: code,
-    };
-    post(`account`, params)
-      .then((resp) =>
-        this.setState({
-          account: resp.data,
-        }),
-      )
-      .catch((err) => console.log(err));
+  postAccount = (data) => {
+    console.log(data, 'new data');
+    const { token } = this.state.userInfo;
+    this.props.accountUserActions.postAccount(token, data);
   };
 
-  putAccount = (newData) => {
-    const { userInfo } = this.state;
-    var code = {
-      email: newData.email,
-      password: newData.password,
-      firstname: newData.firstname,
-      lastname: newData.lastname,
-      phone: newData.phone,
-      address: newData.address,
-    };
-    const token = userInfo.token;
-    var id = newData._id;
-    const params = {
-      token,
-      body: code,
-    };
-    put(`account/${id}`, params)
-      .then((resp) =>
-        this.setState({
-          account: resp.data,
-        }),
-      )
-      .catch((err) => console.log(err));
+  putAccount = (id, newData) => {
+    const { token } = this.state.userInfo;
+    this.props.accountUserActions.putAccount(token, id, newData);
   };
 
-  delAccount = (oldData) => {
-    const { userInfo } = this.state;
-    const token = userInfo.token;
-    var id = oldData._id;
-    const params = {
-      token,
-    };
-    _delete(`account/${id}`, params)
-      .then((resp) =>
-        this.setState({
-          account: resp.data,
-        }),
-      )
-      .catch((err) => console.log(err));
-  };
-
-  reloadPage = () => {
-    window.location.reload();
+  delAccount = (id) => {
+    const { token } = this.state.userInfo;
+    this.props.accountUserActions.delAccount(token, id);
   };
 
   render() {
@@ -119,7 +83,6 @@ class Account extends React.Component {
           postAccount={this.postAccount}
           putAccount={this.putAccount}
           delAccount={this.delAccount}
-          reloadPage={this.reloadPage}
         />
       </Layout>
     );

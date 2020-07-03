@@ -4,10 +4,6 @@ import MaterialTable from 'material-table';
 
 const headerStyle = {
   borderWidth: 1,
-  borderRightWidth: 1,
-  borderLeftWidth: 1,
-  borderBottomWidth: 1,
-  borderTopWidth: 1,
   borderColor: '#f2f2f2',
   borderStyle: 'solid',
   backgroundColor: '#00a3a3',
@@ -15,16 +11,13 @@ const headerStyle = {
 };
 
 const cellStyle = {
-  borderWidth: 0,
-  borderLeftWidth: 1,
-  borderRightWidth: 1,
-  borderBottomWidth: 1,
+  borderWidth: 1,
   borderColor: '#f2f2f2',
   borderStyle: 'solid',
 };
+
 const SMSPage = (props) => {
   const { data } = props;
-
   const renderDropdown = (props) => {
     return (
       <FormControl variant="outlined">
@@ -51,18 +44,6 @@ const SMSPage = (props) => {
     { title: 'Note', field: 'note' },
   ];
 
-  const [status, setStatus] = React.useState({
-    columns: [
-      { title: 'Id', field: '_id' },
-      { title: 'Amount', field: 'amount' },
-      { title: 'Bank', field: 'address' },
-      { title: 'Body', field: 'body' },
-      { title: 'Phone', field: 'phone' },
-      { title: 'Status', field: 'status' },
-      { title: 'Note', field: 'note' },
-    ],
-  });
-
   return (
     <Box p={5} width="100%">
       <MaterialTable
@@ -79,6 +60,7 @@ const SMSPage = (props) => {
           },
         }}
         editable={{
+          onRowAddCancelled: (rowData) => console.log('Row adding cancelled'),
           onRowUpdate: (newData, oldData) =>
             new Promise((resolve) => {
               setTimeout(() => {
