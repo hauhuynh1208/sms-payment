@@ -47,6 +47,10 @@ const DashboardPage = (props) => {
     return _data;
   };
 
+  function format(x) {
+    return isNaN(x) ? '' : x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
   const formatLineData = (data = reports) => {
     const lineData = reports.filter((d) => d.type === 'line')[0].data;
     const labels = [];
@@ -55,6 +59,7 @@ const DashboardPage = (props) => {
     });
     const values = [];
     lineData.map((d) => {
+      // var val = format(d.value);
       values.push(d.value);
     });
     const _data = {
@@ -83,6 +88,7 @@ const DashboardPage = (props) => {
         },
       ],
     };
+
     return _data;
   };
 
