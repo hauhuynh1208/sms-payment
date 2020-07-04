@@ -48,7 +48,7 @@ const DashboardPage = (props) => {
   };
 
   function format(x) {
-    return isNaN(x) ? '' : x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return isNaN(x) ? '' : x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   const formatLineData = (data = reports) => {
@@ -59,7 +59,6 @@ const DashboardPage = (props) => {
     });
     const values = [];
     lineData.map((d) => {
-      // var val = format(d.value);
       values.push(d.value);
     });
     const _data = {
@@ -129,7 +128,23 @@ const DashboardPage = (props) => {
             />
           </Box>
           <Box width="65%">
-            <Line data={formatLineData(props.reports)} />
+            <Line
+              data={formatLineData(props.reports)}
+              options={{
+                scales: {
+                  yAxes: [
+                    {
+                      ticks: {
+                        callback: function (value, index, values) {
+                          var val = format(value);
+                          return val;
+                        },
+                      },
+                    },
+                  ],
+                },
+              }}
+            />
           </Box>
         </Box>
 

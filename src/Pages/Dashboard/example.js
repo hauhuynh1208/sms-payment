@@ -24,23 +24,23 @@ export default [
     data: [
       {
         time: '27/06',
-        value: 1111,
+        value: 111882,
       },
       {
         time: '28/06',
-        value: 1234,
+        value: 124312,
       },
       {
         time: '29/06',
-        value: 1000,
+        value: 101200,
       },
       {
         time: '30/06',
-        value: 1543,
+        value: 154443,
       },
       {
         time: '01/06',
-        value: 1452,
+        value: 745122,
       },
     ],
   },
