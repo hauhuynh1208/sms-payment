@@ -15,6 +15,7 @@ var x = 'd';
 
 const DashboardPage = (props) => {
   const { reports } = props;
+  console.log(reports, 'report');
   const [time, setTime] = React.useState(x);
 
   const handleChange = (event) => {

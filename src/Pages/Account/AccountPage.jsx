@@ -18,13 +18,6 @@ const cellStyle = {
 
 const AccountPage = (props) => {
   const { mainAccount, accounts } = props;
-  const columnMainAccount = [
-    { title: 'FirstName', field: 'firstname' },
-    { title: 'LastName', field: 'lastname' },
-    { title: 'Email', field: 'email' },
-    { title: 'Phone', field: 'phone' },
-    { title: 'Address', field: 'address' },
-  ];
   const columns = [
     { title: 'FirstName', field: 'firstname' },
     { title: 'LastName', field: 'lastname' },
@@ -34,11 +27,12 @@ const AccountPage = (props) => {
   ];
   const arrMainAccount = [];
   arrMainAccount.push(mainAccount);
+
   return (
     <Box p={5} width="100%">
       <MaterialTable
         title="Main Account"
-        columns={columnMainAccount}
+        columns={columns}
         data={arrMainAccount}
         options={{
           search: false,
