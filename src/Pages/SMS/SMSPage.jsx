@@ -54,11 +54,6 @@ const SMSPage = (props) => {
           headerStyle,
           cellStyle,
         }}
-        localization={{
-          toolbar: {
-            nRowsSelected: 10,
-          },
-        }}
         editable={{
           onRowAddCancelled: (rowData) => console.log('Row adding cancelled'),
           onRowUpdate: (newData, oldData) =>
@@ -69,18 +64,6 @@ const SMSPage = (props) => {
                 resolve();
               }, 600);
             }),
-          //   onRowDelete: (oldData) =>
-          //     new Promise((resolve) => {
-          //       // console.log(oldData, 'del data')
-          //       // setTimeout(() => {
-          //       // resolve();
-          //       // setState((prevState) => {
-          //       //     const data = [...prevState.data];
-          //       //     data.splice(data.indexOf(oldData), 1);
-          //       //     return { ...prevState, data };
-          //       // });
-          //       // }, 600);
-          //     }),
         }}
       />
     </Box>

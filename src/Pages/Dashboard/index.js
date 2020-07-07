@@ -5,6 +5,7 @@ import { reportActions } from '../../actions/reportActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import dummy from './example';
+import Loading from '../../components/loading';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -41,7 +42,11 @@ class Dashboard extends React.Component {
   render() {
     const { reports, loading, error } = this.state;
     if (loading) {
-      return <Layout>Loading</Layout>;
+      return (
+        <Layout>
+          <Loading />
+        </Layout>
+      );
     }
     return <DashboardPage reports={dummy} onChangeTime={this.onChangeTime} />;
   }

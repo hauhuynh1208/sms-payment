@@ -4,6 +4,7 @@ import Layout from '../../components/Layout';
 import { smsActions } from '../../actions/smsActions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Loading from '../../components/loading';
 
 class SMS extends React.Component {
   constructor(props) {
@@ -59,7 +60,11 @@ class SMS extends React.Component {
   render() {
     const { sms, loading, errors, isEdited } = this.state;
     if (loading) {
-      return <Layout>loading</Layout>;
+      return (
+        <Layout>
+          <Loading />
+        </Layout>
+      );
     }
     return (
       <Layout>

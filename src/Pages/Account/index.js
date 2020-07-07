@@ -4,14 +4,14 @@ import AccountPage from './AccountPage';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { accountUserActions } from '../../actions/accountUserActions';
+import Loading from '../../components/loading';
 
 class Account extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
-      account: [],
-      accountMain: [],
+      loading: true,
+      accounts: {},
       isPosted: false,
       isEdited: false,
       isDeleted: false,
@@ -23,15 +23,11 @@ class Account extends React.Component {
     let state = {
       errors: prevState.errors,
     };
-
     if (nextProps.accountUser.loading !== prevState.loading) {
       state.loading = nextProps.accountUser.loading;
     }
     if (nextProps.accountUser.accountUser !== prevState.accountUser) {
-      var arrMain = [];
-      arrMain.push(nextProps.accountUser.accountUser);
-      state.accountMain = arrMain;
-      state.account = nextProps.accountUser.accountUser.children;
+      state.accounts = nextProps.accountUser.accountUser;
     }
     if (nextProps.accountUser.isPosted !== prevState.isPosted) {
       state.isPosted = nextProps.accountUser.isPosted;
@@ -57,13 +53,13 @@ class Account extends React.Component {
     }
   }
 
-  postAccount = (data) => {
+  createAccount = (data) => {
     console.log(data, 'new data');
     const { token } = this.state.userInfo;
     this.props.accountUserActions.postAccount(token, data);
   };
 
-  putAccount = (id, newData) => {
+  editAccount = (id, newData) => {
     const { token } = this.state.userInfo;
     this.props.accountUserActions.putAccount(token, id, newData);
   };
@@ -74,14 +70,21 @@ class Account extends React.Component {
   };
 
   render() {
-    const { account, accountMain } = this.state;
+    const { loading, accounts } = this.state;
+    if (loading) {
+      return (
+        <Layout>
+          <Loading />
+        </Layout>
+      );
+    }
     return (
       <Layout>
         <AccountPage
-          dataAccountMain={accountMain}
-          dataAccount={account}
-          postAccount={this.postAccount}
-          putAccount={this.putAccount}
+          mainAccount={accounts}
+          accounts={accounts.children}
+          createAccount={this.createAccount}
+          editAccount={this.editAccount}
           delAccount={this.delAccount}
         />
       </Layout>

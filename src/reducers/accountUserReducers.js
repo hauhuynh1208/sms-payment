@@ -1,7 +1,7 @@
 import actionConstants from '../actionConstants';
 const initState = {
   loading: false,
-  accountUser: [],
+  accountUser: {},
   getAllAccountError: '',
   isPosted: false,
   isEdited: false,
