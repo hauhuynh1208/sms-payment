@@ -17,6 +17,7 @@ import {
   Info,
   Settings,
   PowerSettingsNew,
+  Book,
 } from '@material-ui/icons';
 import useStyles from './style';
 import colors from '../../styles/colors';
@@ -123,7 +124,7 @@ const Layout = (props) => {
                   />
                 </ListItem>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 to="/about"
                 className={clsx(classes.link, classes.link__hover)}
                 onClick={() => handleListItemClick(3)}
@@ -137,13 +138,28 @@ const Layout = (props) => {
                     style={{ color: colors.white }}
                   />
                 </ListItem>
-              </NavLink>
+              </NavLink> */}
               <NavLink
-                to="/setting"
+                to="/order"
                 className={clsx(classes.link, classes.link__hover)}
                 onClick={() => handleListItemClick(4)}
               >
                 <ListItem button selected={selectedIndex === 4}>
+                  <ListItemIcon>
+                    <Book className={classes.icon__feature} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary="Order"
+                    style={{ color: colors.white }}
+                  />
+                </ListItem>
+              </NavLink>
+              <NavLink
+                to="/setting"
+                className={clsx(classes.link, classes.link__hover)}
+                onClick={() => handleListItemClick(5)}
+              >
+                <ListItem button selected={selectedIndex === 5}>
                   <ListItemIcon>
                     <Settings className={classes.icon__feature} />
                   </ListItemIcon>

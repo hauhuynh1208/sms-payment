@@ -6,6 +6,8 @@ export const accountUserActions = {
   putAccount,
   postAccount,
   delAccount,
+  editPassword,
+  resetPassword,
 };
 
 function getAccount(token) {
@@ -113,6 +115,72 @@ function delAccount(token, id) {
       .catch((error) => {
         dispatch({
           type: actionConstants.DEL_ACCOUNT_FAILURE,
+          data: error.message,
+        });
+        return dispatch({
+          type: actionConstants.END_QUERY,
+        });
+      });
+  };
+}
+
+function editPassword(token, newPassword, confirmPassword) {
+  return async (dispatch, getState) => {
+    dispatch({ type: actionConstants.START_QUERY });
+    const params = {
+      token,
+      body: {
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+      },
+    };
+    await put(`account/updatepassword`, params)
+      .then((resp) => {
+        console.log(resp, 'resp');
+        dispatch({
+          type: actionConstants.EDIT_PASSWORD_SUCCESS,
+          data: resp.data,
+        });
+        return dispatch({
+          type: actionConstants.END_QUERY,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: actionConstants.EDIT_PASSWORD_FAILURE,
+          data: error.message,
+        });
+        return dispatch({
+          type: actionConstants.END_QUERY,
+        });
+      });
+  };
+}
+
+function resetPassword(token, newPassword, confirmPassword) {
+  return async (dispatch, getState) => {
+    dispatch({ type: actionConstants.START_QUERY });
+    const params = {
+      token,
+      body: {
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+      },
+    };
+    await put(`account/updatepassword`, params)
+      .then((resp) => {
+        console.log(resp, 'resp');
+        dispatch({
+          type: actionConstants.EDIT_PASSWORD_SUCCESS,
+          data: resp.data,
+        });
+        return dispatch({
+          type: actionConstants.END_QUERY,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: actionConstants.EDIT_PASSWORD_FAILURE,
           data: error.message,
         });
         return dispatch({

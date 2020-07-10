@@ -12,10 +12,21 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import styles from './style';
 
+var openPanel2 = false;
 const SettingPage = (props) => {
+  const { loading, mainAccount, message } = props;
+  console.log(mainAccount, 'mainAccount');
   const [state, setExpanded] = React.useState({
     panel1: true,
-    panel2: false,
+    panel2: openPanel2,
+  });
+
+  const [password, setPassword] = React.useState({
+    newPassword: '',
+    confirmPassword: '',
+    error: '',
+    success: '',
+    loading: true,
   });
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -24,8 +35,53 @@ const SettingPage = (props) => {
     }
     if (panel == 'panel2') {
       setExpanded({ ...state, panel2: !state.panel2 });
+      openPanel2 = true;
     }
   };
+
+  const handleChangeNewPassWord = (event) => {
+    setPassword({ ...password, newPassword: event.target.value });
+    console.log(password.newPassword, 'new password');
+  };
+
+  const handleChangeConfirmPassWord = (event) => {
+    setPassword({ ...password, confirmPassword: event.target.value });
+    console.log(password.confirmPassword, 'confirm password');
+  };
+
+  const validatePassword = () => {
+    if (
+      !password.newPassword ||
+      !password.confirmPassword ||
+      password.newPassword != password.confirmPassword
+    ) {
+      setPassword({
+        ...password,
+        error: '(*) Password or confirmPassword is invalid',
+      });
+      console.log(password.error, 'error');
+    } else {
+      setPassword({
+        ...password,
+        error: null,
+        success: '(*) Change password success',
+      });
+      setTimeout(() => {
+        props.editPassword(password.newPassword, password.confirmPassword);
+      }, 1000);
+    }
+  };
+  const noChangePassword = () => {
+    setPassword({
+      ...password,
+      newPassword: '',
+      confirmPassword: '',
+      error: null,
+    });
+  };
+
+  const arrMainAccount = [];
+  arrMainAccount.push(mainAccount);
 
   const classes = styles();
   return (
@@ -46,55 +102,83 @@ const SettingPage = (props) => {
           </Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordion__details1}>
-          <Box width="30%" pr={30}>
-            <Box pt={3} display="flex" justifyContent="space-between">
+          <Box
+            width={1000}
+            display="flex"
+            justifyContent="space-between"
+            flexWrap="wrap"
+          >
+            <Box
+              width={400}
+              pt={3}
+              display="flex"
+              justifyContent="space-between"
+            >
               <Typography className={classes.text__info}>FirstName</Typography>
               <TextField
                 className={classes.input__password}
                 disabled
-                defaultValue="Truong Ngoc"
+                defaultValue={arrMainAccount[0].firstname}
                 variant="outlined"
                 size="small"
               />
             </Box>
-            <Box pt={3} display="flex" justifyContent="space-between">
+            <Box
+              width={400}
+              pt={3}
+              display="flex"
+              justifyContent="space-between"
+            >
               <Typography className={classes.text__info}>LastName</Typography>
               <TextField
                 className={classes.input__password}
                 disabled
-                defaultValue="Vinh Tu"
+                defaultValue={arrMainAccount[0].lastname}
                 variant="outlined"
                 size="small"
               />
             </Box>
-            <Box pt={3} display="flex" justifyContent="space-between">
+            <Box
+              width={400}
+              pt={3}
+              display="flex"
+              justifyContent="space-between"
+            >
               <Typography className={classes.text__info}>Phone</Typography>
               <TextField
                 className={classes.input__password}
                 disabled
-                defaultValue="0357133415"
+                defaultValue={arrMainAccount[0].phone}
                 variant="outlined"
                 size="small"
               />
             </Box>
-          </Box>
-          <Box width="30%">
-            <Box pt={3} display="flex" justifyContent="space-between">
+            <Box
+              width={400}
+              pt={3}
+              display="flex"
+              justifyContent="space-between"
+            >
               <Typography className={classes.text__info}>Email</Typography>
               <TextField
                 className={classes.input__password}
                 disabled
-                defaultValue="Vinhtu125@gmail.com"
+                defaultValue={arrMainAccount[0].email}
                 variant="outlined"
                 size="small"
               />
             </Box>
-            <Box pt={3} display="flex" justifyContent="space-between">
+            <Box
+              width={400}
+              pt={3}
+              display="flex"
+              justifyContent="space-between"
+            >
               <Typography className={classes.text__info}>Address</Typography>
               <TextField
                 className={classes.input__password}
                 disabled
-                defaultValue="180 đường số 4, phường Trường Thọ , quận Thủ Đức"
+                defaultValue={arrMainAccount[0].address}
                 variant="outlined"
                 size="small"
               />
@@ -128,6 +212,8 @@ const SettingPage = (props) => {
               placeholder="Enter new password"
               variant="outlined"
               size="small"
+              value={password.newPassword}
+              onChange={handleChangeNewPassWord}
             />
           </Box>
           <Box pt={3} display="flex" justifyContent="space-between">
@@ -139,14 +225,33 @@ const SettingPage = (props) => {
               placeholder="Enter confirm password"
               variant="outlined"
               size="small"
+              value={password.confirmPassword}
+              onChange={handleChangeConfirmPassWord}
             />
           </Box>
+
+          {password.error ? (
+            <Typography
+              variant="caption"
+              color="secondary"
+              className={classes.text__error}
+            >
+              {password.error}
+            </Typography>
+          ) : (
+            <Typography variant="caption" className={classes.text__success}>
+              {password.success}
+            </Typography>
+          )}
+
           <Box pt={3} display="flex" justifyContent="space-between">
             <Button
               variant="contained"
               size="medium"
               color="primary"
               className={classes.btn__change}
+              loading={loading}
+              onClick={() => validatePassword()}
             >
               Change
             </Button>
@@ -155,6 +260,7 @@ const SettingPage = (props) => {
               size="medium"
               color="secondary"
               className={classes.btn__exit}
+              onClick={() => noChangePassword()}
             >
               Exit
             </Button>

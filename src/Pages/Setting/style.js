@@ -13,21 +13,20 @@ const styles = makeStyles((theme) => ({
     fontWeight: 'bold',
   },
   text__info: {
+    width: '100%',
     fontSize: 16,
     alignSelf: 'center',
     marginRight: theme.spacing(2),
   },
   input__password: {
-    width: 300,
+    minWidth: 300,
   },
   accordion__details1: {
     width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
     paddingBottom: theme.spacing(5),
   },
   accordion__details2: {
-    width: '35%',
+    width: 500,
     display: 'flex',
     flexDirection: 'column',
     paddingBottom: theme.spacing(5),
@@ -35,14 +34,33 @@ const styles = makeStyles((theme) => ({
   btn__change: {
     width: '49%',
     textTransform: 'none',
-    backgroundColor: '#00a3a3',
+    backgroundColor: colors.primary,
     boxShadow: 'none',
+    '&:hover': {
+      backgroundColor: '#008282',
+      boxShadow: 'none',
+    },
   },
   btn__exit: {
     width: '49%',
     textTransform: 'none',
     backgroundColor: '#F28262',
     boxShadow: 'none',
+    '&:hover': {
+      backgroundColor: '#D97558',
+      boxShadow: 'none',
+    },
+  },
+  text__error: {
+    alignSelf: 'flex-end',
+    width: 300,
+    paddingTop: 16,
+  },
+  text__success: {
+    alignSelf: 'flex-end',
+    color: colors.primary,
+    width: 300,
+    paddingTop: 16,
   },
 }));
 

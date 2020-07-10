@@ -6,6 +6,7 @@ const initState = {
   isPosted: false,
   isEdited: false,
   isDeleted: false,
+  editPassword: {},
 };
 
 export default (state = initState, action) => {
@@ -41,6 +42,14 @@ export default (state = initState, action) => {
     case actionConstants.DEL_ACCOUNT_SUCCESS:
       _state.isDeleted = true;
     case actionConstants.DEL_ACCOUNT_FAILURE:
+      _state.delAccountError = action.data;
+    case actionConstants.EDIT_PASSWORD_SUCCESS:
+      _state.editPassword = true;
+    case actionConstants.EDIT_PASSWORD_FAILURE:
+      _state.delAccountError = action.data;
+    case actionConstants.RESET_PASSWORD_SUCCESS:
+      _state.resetPassword = true;
+    case actionConstants.RESET_PASSWORD_FAILURE:
       _state.delAccountError = action.data;
     default:
       return _state;

@@ -1,10 +1,10 @@
-
-import Login from './Pages/Login'
-import Dashboard from './Pages/Dashboard'
-import SMS from './Pages/SMS'
-import Account from './Pages/Account'
-import About from './Pages/About'
-import Setting from './Pages/Setting'
+import Login from './Pages/Login';
+import Dashboard from './Pages/Dashboard';
+import SMS from './Pages/SMS';
+import Account from './Pages/Account';
+import About from './Pages/About';
+import Setting from './Pages/Setting';
+import Order from './Pages/Order';
 
 export default [
   {
@@ -43,6 +43,15 @@ export default [
     requireAuth: true,
   },
   {
+    path: '/order',
+    title: 'Order',
+    breadcrumb: 'Order',
+    breadcrumb_link: true,
+    exact: true,
+    component: Order,
+    requireAuth: true,
+  },
+  {
     path: '/about',
     title: 'About',
     breadcrumb: 'About',
@@ -60,5 +69,4 @@ export default [
     component: Setting,
     requireAuth: true,
   },
-  
-]
+];

@@ -15,8 +15,10 @@ function login({ email, password }) {
         password,
       },
     };
+    console.log(params, 'params');
     await post('login', params)
       .then((resp) => {
+        console.log(resp, 'login');
         localStorage.setItem('userInfo', JSON.stringify(resp.data));
         dispatch({
           type: actionConstants.LOGIN_SUCCESS,
