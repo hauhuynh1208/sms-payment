@@ -2,9 +2,12 @@ import React from 'react';
 import LoginPage from './LoginPage';
 import accountActions from '../../actions/accountActions';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    localStorage.removeItem('userInfo');
+  }
   onLogin = (cre) => {
     this.props.login(cre);
   };
