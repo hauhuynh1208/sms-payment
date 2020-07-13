@@ -21,6 +21,7 @@ const styles = makeStyles((theme) => ({
   },
   input__password: {
     minWidth: 300,
+    marginTop: theme.spacing(2),
   },
   accordion__details1: {
     width: '100%',
@@ -33,7 +34,7 @@ const styles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(5),
   },
   btn__change: {
-    width: '49%',
+    width: 100,
     textTransform: 'none',
     backgroundColor: colors.primary,
     boxShadow: 'none',
@@ -41,9 +42,10 @@ const styles = makeStyles((theme) => ({
       backgroundColor: '#008282',
       boxShadow: 'none',
     },
+    marginRight: theme.spacing(2),
   },
   btn__exit: {
-    width: '49%',
+    width: 100,
     textTransform: 'none',
     backgroundColor: '#F28262',
     boxShadow: 'none',
@@ -62,6 +64,10 @@ const styles = makeStyles((theme) => ({
     color: colors.primary,
     width: 300,
     paddingTop: 16,
+  },
+  select__value: {
+    marginTop: theme.spacing(2),
+    width: 300,
   },
 }));
 

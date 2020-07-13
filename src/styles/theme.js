@@ -1,8 +1,8 @@
-import { createMuiTheme } from '@material-ui/core/styles/'
-import createBreakpoints from '@material-ui/core/styles/createBreakpoints'
-import colors from './colors'
+import { createMuiTheme } from '@material-ui/core/styles/';
+import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
+import colors from './colors';
 
-const breakpoints = createBreakpoints({})
+const breakpoints = createBreakpoints({});
 
 /* eslint-disable import/no-mutable-exports */
 const theme = createMuiTheme({
@@ -15,7 +15,7 @@ const theme = createMuiTheme({
     text: {
       primary: colors.dark2,
       secondary: colors.dark1,
-      white: colors.white
+      white: colors.white,
     },
   },
   spacing: 8,
@@ -86,6 +86,11 @@ const theme = createMuiTheme({
     },
   },
   overrides: {
+    // MuiTableRow: {
+    //   '&.MuiCheckbox-colorSecondary.Mui-checked': {
+    //     color: '#F28262',
+    //   },
+    // },
     MuiAppBar: {
       root: {
         boxShadow: 'none',
@@ -126,6 +131,11 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiTableRow: {
+      '&$selected': {
+        backgroundColor: 'black',
+      },
+    },
   },
   mixins: {
     toolbar: {
@@ -144,7 +154,7 @@ const theme = createMuiTheme({
       },
     },
   },
-})
+});
 
 // export default responsiveFontSizes(theme);
-export default theme
+export default theme;

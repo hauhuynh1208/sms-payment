@@ -5,6 +5,7 @@ import Account from './Pages/Account';
 import About from './Pages/About';
 import Setting from './Pages/Setting';
 import Order from './Pages/Order';
+import ActionSelection from './Pages/ActionSelection';
 
 export default [
   {
@@ -67,6 +68,15 @@ export default [
     breadcrumb_link: true,
     exact: true,
     component: Setting,
+    requireAuth: true,
+  },
+  {
+    path: '/edit-order',
+    title: 'ActionSelection',
+    breadcrumb: 'ActionSelection',
+    breadcrumb_link: true,
+    exact: true,
+    component: ActionSelection,
     requireAuth: true,
   },
 ];

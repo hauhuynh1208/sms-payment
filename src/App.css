@@ -58,6 +58,13 @@ body {
   margin-left: -50px;
 } */
 
-.makeStyles-container__setting-23 {
+/* .makeStyles-container__setting-23 {
   border-top: 4px solid #00a3a3;
+} */
+
+.MTableToolbar-title-59 .MuiTypography-h6 {
+  display: 'none';
+}
+.MuiCheckbox-colorSecondary.Mui-checked {
+  color: #f28262 !important;
 }
