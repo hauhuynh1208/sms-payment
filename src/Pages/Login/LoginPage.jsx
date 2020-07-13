@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,30 +11,30 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import useStyles from './styles'
+import useStyles from './styles';
 
 function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Your Website
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
-const LoginPage = props => {
-    const classes = useStyles();
-    const [state, setState] = React.useState({
-        email: 'ngoitest@email.com',
-        password: '1234567',
-    })
-    const handleChange = e => {
-        setState({...state, [e.target.id]:e.target.value})
-    }
+const LoginPage = (props) => {
+  const classes = useStyles();
+  const [state, setState] = React.useState({
+    email: 'ngoitest@email.com',
+    password: 'newpasswordupdate',
+  });
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.id]: e.target.value });
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -82,9 +82,9 @@ const LoginPage = props => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={(e)=>{
-                e.preventDefault();
-                props.onLogin(state);
+            onClick={(e) => {
+              e.preventDefault();
+              props.onLogin(state);
             }}
           >
             Sign In
@@ -108,6 +108,6 @@ const LoginPage = props => {
       </Box>
     </Container>
   );
-}
+};
 
-export default LoginPage
+export default LoginPage;

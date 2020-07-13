@@ -208,6 +208,7 @@ const SettingPage = (props) => {
               New Password <span style={{ color: 'red' }}>*</span>
             </Typography>
             <TextField
+              type="password"
               className={classes.input__password}
               placeholder="Enter new password"
               variant="outlined"
@@ -221,6 +222,7 @@ const SettingPage = (props) => {
               Confirm password <span style={{ color: 'red' }}>*</span>
             </Typography>
             <TextField
+              type="password"
               className={classes.input__password}
               placeholder="Enter confirm password"
               variant="outlined"

@@ -1,5 +1,11 @@
 import React from 'react';
-import { Box, FormControl, Select, MenuItem } from '@material-ui/core';
+import {
+  Box,
+  FormControl,
+  Select,
+  MenuItem,
+  TextField,
+} from '@material-ui/core';
 import MaterialTable from 'material-table';
 
 const headerStyle = {
@@ -41,7 +47,17 @@ const SMSPage = (props) => {
     { title: 'Body', field: 'body', editable: 'never' },
     { title: 'Phone', field: 'phone', editable: 'never' },
     { title: 'Status', field: 'status', editComponent: renderDropdown },
-    { title: 'Note', field: 'note' },
+    {
+      title: 'Note',
+      field: 'note',
+      editComponent: (props) => (
+        <TextField
+          multiline
+          value={props.value}
+          onChange={(e) => props.onChange(e.target.value)}
+        />
+      ),
+    },
   ];
 
   return (
