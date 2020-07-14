@@ -9,8 +9,16 @@ import {
   Modal,
   Typography,
   Backdrop,
+  Menu,
 } from '@material-ui/core';
-import { Publish, GetApp, AddBox } from '@material-ui/icons';
+import {
+  Publish,
+  GetApp,
+  AddBox,
+  Create,
+  KeyboardArrowDown,
+  AccessTime,
+} from '@material-ui/icons';
 import colors from '../../styles/colors';
 import { history } from '../../utils/history';
 import Table from '../../components/Table';
@@ -36,19 +44,16 @@ const columns = [
 
 export default (props) => {
   const classes = useStyles();
-  const [action, setAction] = React.useState('');
-  const [time, setTime] = React.useState('');
+  const [anchorEl, setAnchorEl] = React.useState({
+    actions: null,
+    time: null,
+  });
+  const [time, setTime] = React.useState('Show by date');
   const [openModal, setOpen] = React.useState(false);
   const [dataRow, setDataRow] = React.useState({
     oldDataSelected: [],
     status: '',
   });
-  const handleChangeAction = (event) => {
-    setAction(event.target.value);
-  };
-  const handleChangeTime = (event) => {
-    setTime(event.target.value);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -61,6 +66,10 @@ export default (props) => {
     });
   };
 
+  const handleActionsClick = (event) => {
+    setAnchorEl({ ...anchorEl, actions: event.currentTarget });
+  };
+
   const editDataRow = () => {
     if (dataRow.oldDataSelected.length == 1) {
       history.push('/edit-order', {
@@ -69,8 +78,10 @@ export default (props) => {
       });
     } else if (dataRow.oldDataSelected.length > 1) {
       setDataRow({ ...dataRow, status: 'Please select only one row !' });
+      setAnchorEl({ ...anchorEl, actions: null });
     } else {
       setDataRow({ ...dataRow, status: 'Please select data row !' });
+      setAnchorEl({ ...anchorEl, actions: null });
     }
   };
 
@@ -79,51 +90,62 @@ export default (props) => {
       setOpen(true);
     } else {
       setDataRow({ ...dataRow, status: 'Please select a data row !' });
+      setAnchorEl({ ...anchorEl, actions: null });
     }
   };
+
+  const handleTimeClick = (event) => {
+    setAnchorEl({ ...anchorEl, time: event.currentTarget });
+  };
+
+  const clickTimeMenu = (event) => {
+    setTime(event.currentTarget.innerText);
+    setAnchorEl({ ...anchorEl, time: null });
+  };
+
   return (
     <Box width="100%" height="100%" display="flex" flexDirection="column">
       <Box display="flex" flexDirection="row" justifyContent="space-between">
-        <Box pb={1} display="flex" flexDirection="row">
+        <Box mb={1} display="flex" flex={1}>
+          <Button
+            variant="contained"
+            size="large"
+            className={classes.button__action}
+            startIcon={<Create />}
+            onClick={createDataRow}
+          >
+            <Typography>Create</Typography>
+          </Button>
           <Button
             variant="contained"
             size="large"
             className={classes.button__action}
             startIcon={<AddBox />}
-            onClick={createDataRow}
+            endIcon={<KeyboardArrowDown />}
+            aria-controls="actions-menu"
+            aria-haspopup="true"
+            onClick={handleActionsClick}
           >
-            <Typography>Create</Typography>
+            <Typography>Actions</Typography>
           </Button>
-          <FormControl variant="outlined" className={classes.form__control}>
-            <InputLabel
-              id="demo-simple-select-outlined-label"
-              style={{ lineHeight: '4px' }}
-            >
-              Action
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={action}
-              onChange={handleChangeAction}
-              label="Action"
-              style={{ height: 40 }}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={1} onClick={editDataRow}>
-                Edit order
-              </MenuItem>
-              <MenuItem value={2} onClick={deleteDataRow}>
-                Delete order
-              </MenuItem>
-              <MenuItem value={3}>Send payment request</MenuItem>
-              <MenuItem value={4}>Send payment confirmation</MenuItem>
-            </Select>
-          </FormControl>
+          <Menu
+            id="actions-menu"
+            anchorEl={anchorEl.actions}
+            keepMounted
+            open={Boolean(anchorEl.actions)}
+            onClose={() => setAnchorEl({ ...anchorEl, actions: null })}
+          >
+            <MenuItem value={1} onClick={editDataRow}>
+              Edit order
+            </MenuItem>
+            <MenuItem value={2} onClick={deleteDataRow}>
+              Delete order
+            </MenuItem>
+            <MenuItem value={3}>Send payment request</MenuItem>
+            <MenuItem value={4}>Send payment confirmation</MenuItem>
+          </Menu>
         </Box>
-        <Box>
+        <Box mb={1} display="flex" flex={1} justifyContent="flex-end">
           <Button
             variant="contained"
             size="large"
@@ -140,26 +162,36 @@ export default (props) => {
           >
             Export
           </Button>
-          <FormControl variant="outlined" className={classes.form__control}>
-            <InputLabel
-              id="demo-simple-select-outlined-label"
-              style={{ lineHeight: '4px' }}
-            >
-              Time
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={time}
-              onChange={handleChangeTime}
-              label="Time"
-              style={{ height: 40 }}
-            >
-              <MenuItem value={1}>Show by date</MenuItem>
-              <MenuItem value={2}>Show by week</MenuItem>
-              <MenuItem value={3}>Show by month</MenuItem>
-            </Select>
-          </FormControl>
+          <Button
+            variant="contained"
+            size="large"
+            className={classes.button__action}
+            style={{ marginRight: 0 }}
+            startIcon={<AccessTime />}
+            endIcon={<KeyboardArrowDown />}
+            aria-controls="time-menu"
+            aria-haspopup="true"
+            onClick={handleTimeClick}
+          >
+            <Typography>{time}</Typography>
+          </Button>
+          <Menu
+            id="time-menu"
+            anchorEl={anchorEl.time}
+            keepMounted
+            open={Boolean(anchorEl.time)}
+            onClose={() => setAnchorEl({ ...anchorEl, time: null })}
+          >
+            <MenuItem value="Date" onClick={clickTimeMenu}>
+              Show by date
+            </MenuItem>
+            <MenuItem value="Week" onClick={clickTimeMenu}>
+              Show by week
+            </MenuItem>
+            <MenuItem value="Month" onClick={clickTimeMenu}>
+              Show by month
+            </MenuItem>
+          </Menu>
         </Box>
       </Box>
       {dataRow.status && (

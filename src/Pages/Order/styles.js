@@ -1,76 +1,44 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import colors from '../../styles/colors';
 
 export default makeStyles((theme) => ({
-  root: {
-    width: '100%',
+  container_order: {
+    overflowX: 'hidden',
   },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
-  table: {
-    minWidth: 750,
-  },
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
-  },
-
-  ///
-
-  formControl: {
-    minWidth: 250,
-    height: 40,
-    '& > .MuiOutlinedInput-input': {
-      padding: '0px !important',
-      paddingRight: theme.spacing(2),
-    },
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+  formControlRoot: {
+    minWidth: theme.spacing(31.25),
+    height: theme.spacing(5),
   },
   button__action: {
-    marginRight: 8,
-    height: 40,
-    backgroundColor: '#00a3a3',
-    color: 'white',
+    marginRight: theme.spacing(1),
+    height: theme.spacing(5),
+    backgroundColor: colors.primary,
+    color: colors.white,
     boxShadow: 'none',
     '&:hover': {
-      backgroundColor: '#008282',
+      backgroundColor: colors.hoverPrimary,
       boxShadow: 'none',
     },
-  },
-  button__create: {
-    position: 'absolute',
-    left: 0,
-    top: -100,
-  },
-  btn__change: {
-    width: 100,
     textTransform: 'none',
-    backgroundColor: '#00a3a3',
+  },
+  btn__delete: {
+    width: theme.spacing(12.5),
+    textTransform: 'none',
+    backgroundColor: colors.primary,
     boxShadow: 'none',
     '&:hover': {
-      backgroundColor: '#008282',
+      backgroundColor: colors.hoverPrimary,
       boxShadow: 'none',
     },
     marginRight: theme.spacing(2),
   },
   btn__exit: {
-    width: 100,
+    width: theme.spacing(12.5),
     textTransform: 'none',
-    backgroundColor: '#F28262',
+    backgroundColor: colors.secondary,
     boxShadow: 'none',
     '&:hover': {
-      backgroundColor: '#D97558',
+      backgroundColor: colors.hoverSecondary,
       boxShadow: 'none',
     },
   },
@@ -81,18 +49,19 @@ export default makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text__link: {
-    color: 'white',
-    textDecoration: 'none',
+  box__deleteRow: {
+    position: 'absolute',
+    width: theme.spacing(37.5),
+    height: theme.spacing(18.75),
+    backgroundColor: 'white',
+    borderWidth: 0,
+    borderRadius: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
   },
-  text__linkSelection: {
-    color: 'black',
-    textDecoration: 'none',
-  },
-  link__action: {
-    textDecoration: 'none',
-  },
-  text_modalDelete: {
-    color: '#00a3a3',
+  text__modalDelete: {
+    color: colors.primary,
   },
 }));

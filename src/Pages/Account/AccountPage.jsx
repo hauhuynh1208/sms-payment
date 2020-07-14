@@ -1,21 +1,6 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
-import MaterialTable from 'material-table';
 import Table from '../../components/Table';
-
-const headerStyle = {
-  borderWidth: 1,
-  borderColor: '#f2f2f2',
-  borderStyle: 'solid',
-  backgroundColor: '#00a3a3',
-  color: 'white',
-};
-
-const cellStyle = {
-  borderWidth: 1,
-  borderColor: '#f2f2f2',
-  borderStyle: 'solid',
-};
 
 const AccountPage = (props) => {
   const { mainAccount, accounts } = props;
@@ -45,11 +30,6 @@ const AccountPage = (props) => {
         title="Manager Account"
         columns={columns}
         data={accounts}
-        options={{
-          headerStyle: headerStyle,
-          cellStyle: cellStyle,
-          pageSize: 10,
-        }}
         editable={{
           onRowAdd: (newData) =>
             new Promise((resolve) => {
