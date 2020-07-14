@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import {
@@ -36,7 +35,7 @@ const NavItem = ({ to, label, icon }) => {
         className={classes.navLink}
         activeClassName={classes.item__select}
       >
-        <ListItem>
+        <ListItem component="div">
           <ListItemIcon>
             {React.cloneElement(icon, { className: classes.icon__feature })}
           </ListItemIcon>

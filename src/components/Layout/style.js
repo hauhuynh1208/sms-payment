@@ -1,11 +1,12 @@
 import { makeStyles } from '@material-ui/core';
 import colors from '../../styles/colors';
-import sidebar3 from '../../assets/img/sidebar-3.jpg';
 
 export default makeStyles((theme) => ({
   //Body
   root: {
     display: 'flex',
+    flex: 1,
+    height: '100vh',
     flexDirection: 'row',
   },
   sideBar__bgImage: {

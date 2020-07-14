@@ -21,7 +21,6 @@ class Dashboard extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     let state = {};
     if (nextProps.report.reports !== prevState.reports) {
-      console.log(nextProps.report, 'report next');
       state.reports = nextProps.report.reports;
     }
     if (nextProps.report.loading !== prevState.loading) {
@@ -42,7 +41,6 @@ class Dashboard extends React.Component {
 
   render() {
     const { reports, loading, error } = this.state;
-    console.log(reports);
     if (loading) {
       return (
         <Layout>

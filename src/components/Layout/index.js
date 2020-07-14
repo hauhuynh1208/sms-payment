@@ -12,7 +12,11 @@ const Layout = (props) => {
   return (
     <div className={classes.root}>
       <Box minWidth={260}>
-        <img src={sidebar3} className={classes.sideBar__bgImage} />
+        <img
+          src={sidebar3}
+          className={classes.sideBar__bgImage}
+          alt="app-img"
+        />
         <Box className={classes.mask__image} />
         <Box className={classes.container}>
           <Box
@@ -37,7 +41,9 @@ const Layout = (props) => {
           <Navigation />
         </Box>
       </Box>
-      {props.children}
+      <Box p={5} width="100%">
+        {props.children}
+      </Box>
     </div>
   );
 };

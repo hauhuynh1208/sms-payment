@@ -11,27 +11,23 @@ import styles from './style';
 import { Doughnut, Line } from 'react-chartjs-2';
 import Layout from '../../components/Layout';
 
-var x = 'd';
-
 const DashboardPage = (props) => {
   const { reports } = props;
-  console.log(reports, 'report');
-  const [time, setTime] = React.useState(x);
+  const [time, setTime] = React.useState('d');
 
   const handleChange = (event) => {
     props.onChangeTime(event.target.value);
     setTime(event.target.value);
-    x = event.target.value;
   };
 
   const formatDoughnutData = (data = reports) => {
     const doughnutData = reports.filter((d) => d.type === 'doughnut')[0].data;
     const labels = [];
-    doughnutData.map((d) => {
+    doughnutData.forEach((d) => {
       labels.push(d.name);
     });
     const values = [];
-    doughnutData.map((d) => {
+    doughnutData.forEach((d) => {
       values.push(d.percent);
     });
     const _data = {
@@ -55,11 +51,11 @@ const DashboardPage = (props) => {
   const formatLineData = (data = reports) => {
     const lineData = reports.filter((d) => d.type === 'line')[0].data;
     const labels = [];
-    lineData.map((d) => {
+    lineData.forEach((d) => {
       labels.push(d.time);
     });
     const values = [];
-    lineData.map((d) => {
+    lineData.forEach((d) => {
       values.push(d.value);
     });
     const _data = {
@@ -95,7 +91,7 @@ const DashboardPage = (props) => {
   const classes = styles();
   return (
     <Layout>
-      <Box className={classes.root__dashboard}>
+      <>
         <Box pb={5} display="flex" justifyContent="flex-end">
           <Box>
             <FormControl variant="outlined" className={classes.form__chart}>
@@ -175,7 +171,7 @@ const DashboardPage = (props) => {
                             </TableBody>
                         </Table>
                     </TableContainer> */}
-      </Box>
+      </>
     </Layout>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@material-ui/core';
 import MaterialTable from 'material-table';
+import Table from '../../components/Table';
 
 const headerStyle = {
   borderWidth: 1,
@@ -29,20 +30,18 @@ const AccountPage = (props) => {
   arrMainAccount.push(mainAccount);
 
   return (
-    <Box p={5} width="100%">
-      <MaterialTable
+    <>
+      <Table
         title="Main Account"
         columns={columns}
         data={arrMainAccount}
         options={{
           search: false,
           paging: false,
-          headerStyle: headerStyle,
-          cellStyle: cellStyle,
         }}
       />
       <Box pt={5} />
-      <MaterialTable
+      <Table
         title="Manager Account"
         columns={columns}
         data={accounts}
@@ -83,7 +82,7 @@ const AccountPage = (props) => {
             }),
         }}
       />
-    </Box>
+    </>
   );
 };
 export default AccountPage;

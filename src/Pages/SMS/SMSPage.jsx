@@ -6,21 +6,7 @@ import {
   MenuItem,
   TextField,
 } from '@material-ui/core';
-import MaterialTable from 'material-table';
-
-const headerStyle = {
-  borderWidth: 1,
-  borderColor: '#f2f2f2',
-  borderStyle: 'solid',
-  backgroundColor: '#00a3a3',
-  color: 'white',
-};
-
-const cellStyle = {
-  borderWidth: 1,
-  borderColor: '#f2f2f2',
-  borderStyle: 'solid',
-};
+import Table from '../../components/Table';
 
 const SMSPage = (props) => {
   const { data } = props;
@@ -61,15 +47,11 @@ const SMSPage = (props) => {
   ];
 
   return (
-    <Box p={5} width="100%">
-      <MaterialTable
+    <Box width="100%" height="100%">
+      <Table
         title="SMS Management"
         columns={columns}
         data={data}
-        options={{
-          headerStyle,
-          cellStyle,
-        }}
         editable={{
           onRowAddCancelled: (rowData) => console.log('Row adding cancelled'),
           onRowUpdate: (newData, oldData) =>
