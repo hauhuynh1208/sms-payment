@@ -62,10 +62,8 @@ const SMSPage = (props) => {
         );
       },
       render: (rowData) => {
-        console.log(rowData, 'rowdata');
         let note = rowData.note;
         if (note) {
-          console.log(note.indexOf(' '), 'log');
           if (
             note.length > 20 &&
             (note.indexOf(' ') > 20 || note.indexOf(' ') < 2)
@@ -89,7 +87,6 @@ const SMSPage = (props) => {
           cellStyle,
         }}
         editable={{
-          onRowAddCancelled: (rowData) => console.log('Row adding cancelled'),
           onRowUpdate: (newData, oldData) =>
             new Promise((resolve) => {
               setTimeout(() => {
