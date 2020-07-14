@@ -5,6 +5,7 @@ import {
   Select,
   MenuItem,
   TextField,
+  Typography,
 } from '@material-ui/core';
 import Table from '../../components/Table';
 
@@ -36,13 +37,27 @@ const SMSPage = (props) => {
     {
       title: 'Note',
       field: 'note',
-      editComponent: (props) => (
-        <TextField
-          multiline
-          value={props.value}
-          onChange={(e) => props.onChange(e.target.value)}
-        />
-      ),
+      editComponent: (props) => {
+        return (
+          <TextField
+            multiline
+            value={props.value}
+            onChange={(e) => props.onChange(e.target.value)}
+          />
+        );
+      },
+      render: (rowData) => {
+        let note = rowData.note;
+        if (note) {
+          if (
+            note.length > 20 &&
+            (note.indexOf(' ') > 20 || note.indexOf(' ') < 2)
+          ) {
+            note = rowData.note.slice(0, 20) + '...';
+          }
+        }
+        return <Typography style={{ fontSize: 14 }}>{note}</Typography>;
+      },
     },
   ];
 
@@ -53,7 +68,6 @@ const SMSPage = (props) => {
         columns={columns}
         data={data}
         editable={{
-          onRowAddCancelled: (rowData) => console.log('Row adding cancelled'),
           onRowUpdate: (newData, oldData) =>
             new Promise((resolve) => {
               setTimeout(() => {

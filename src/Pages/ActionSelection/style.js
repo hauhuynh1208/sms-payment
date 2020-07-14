@@ -3,71 +3,35 @@ import colors from '../../styles/colors';
 
 const styles = makeStyles((theme) => ({
   container__setting: {
-    borderWidth: 1,
     boxShadow: '1px 7px 23px -15px rgba(0,0,0,0.51)',
-    paddingLeft: theme.spacing(5),
-    paddingRight: theme.spacing(5),
-    borderTop: '4px solid #00a3a3',
+    padding: theme.spacing(5),
+    margin: theme.spacing(5),
+    borderTop: `4px solid ${colors.primary}`,
+    borderRadius: theme.spacing(1.25),
   },
-  title__setting: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  text__info: {
-    width: '100%',
-    fontSize: 16,
-    alignSelf: 'center',
-    marginRight: theme.spacing(2),
-  },
-  input__password: {
-    minWidth: 300,
-    marginTop: theme.spacing(2),
-  },
-  accordion__details1: {
-    width: '100%',
-    paddingBottom: theme.spacing(5),
-  },
-  accordion__details2: {
-    width: 500,
-    display: 'flex',
-    flexDirection: 'column',
-    paddingBottom: theme.spacing(5),
-  },
-  btn__change: {
-    width: 100,
+  btn__agree: {
+    width: theme.spacing(12.5),
     textTransform: 'none',
     backgroundColor: colors.primary,
     boxShadow: 'none',
     '&:hover': {
-      backgroundColor: '#008282',
+      backgroundColor: colors.hoverPrimary,
       boxShadow: 'none',
     },
     marginRight: theme.spacing(2),
   },
   btn__exit: {
-    width: 100,
+    width: theme.spacing(12.5),
     textTransform: 'none',
-    backgroundColor: '#F28262',
+    backgroundColor: colors.secondary,
     boxShadow: 'none',
     '&:hover': {
-      backgroundColor: '#D97558',
+      backgroundColor: colors.hoverSecondary,
       boxShadow: 'none',
     },
   },
-  text__error: {
-    alignSelf: 'flex-end',
-    width: 300,
-    paddingTop: 16,
-  },
-  text__success: {
-    alignSelf: 'flex-end',
-    color: colors.primary,
-    width: 300,
-    paddingTop: 16,
-  },
-  select__value: {
-    marginTop: theme.spacing(2),
-    width: 300,
+  input__style: {
+    marginTop: theme.spacing(1),
   },
 }));
 

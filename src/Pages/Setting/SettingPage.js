@@ -9,14 +9,14 @@ import {
   AccordionDetails,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import Input from '../../components/Input';
 import styles from './style';
 
 var openPanel2 = false;
 const SettingPage = (props) => {
-  const { loading, mainAccount, message } = props;
+  const { loading, mainAccount } = props;
   console.log(mainAccount, 'mainAccount');
-  const [state, setExpanded] = React.useState({
+  const [statePanel, setExpanded] = React.useState({
     panel1: true,
     panel2: openPanel2,
   });
@@ -31,10 +31,10 @@ const SettingPage = (props) => {
 
   const handleChange = (panel) => (event, newExpanded) => {
     if (panel == 'panel1') {
-      setExpanded({ ...state, panel1: !state.panel1 });
+      setExpanded({ ...statePanel, panel1: !statePanel.panel1 });
     }
     if (panel == 'panel2') {
-      setExpanded({ ...state, panel2: !state.panel2 });
+      setExpanded({ ...statePanel, panel2: !statePanel.panel2 });
       openPanel2 = true;
     }
   };
@@ -88,8 +88,8 @@ const SettingPage = (props) => {
     <Box p={5} width="100%">
       <Accordion
         className={classes.container__setting}
-        style={{ borderTopWidth: 4, borderRadius: 10 }}
-        expanded={state.panel1}
+        style={{ borderRadius: 10 }}
+        expanded={statePanel.panel1}
         onChange={handleChange('panel1')}
       >
         <AccordionSummary
@@ -108,89 +108,45 @@ const SettingPage = (props) => {
             justifyContent="space-between"
             flexWrap="wrap"
           >
-            <Box
-              width={400}
-              pt={3}
-              display="flex"
-              justifyContent="space-between"
-            >
-              <Typography className={classes.text__info}>FirstName</Typography>
-              <TextField
-                className={classes.input__password}
-                disabled
-                defaultValue={arrMainAccount[0].firstname}
-                variant="outlined"
-                size="small"
-              />
-            </Box>
-            <Box
-              width={400}
-              pt={3}
-              display="flex"
-              justifyContent="space-between"
-            >
-              <Typography className={classes.text__info}>LastName</Typography>
-              <TextField
-                className={classes.input__password}
-                disabled
-                defaultValue={arrMainAccount[0].lastname}
-                variant="outlined"
-                size="small"
-              />
-            </Box>
-            <Box
-              width={400}
-              pt={3}
-              display="flex"
-              justifyContent="space-between"
-            >
-              <Typography className={classes.text__info}>Phone</Typography>
-              <TextField
-                className={classes.input__password}
-                disabled
-                defaultValue={arrMainAccount[0].phone}
-                variant="outlined"
-                size="small"
-              />
-            </Box>
-            <Box
-              width={400}
-              pt={3}
-              display="flex"
-              justifyContent="space-between"
-            >
-              <Typography className={classes.text__info}>Email</Typography>
-              <TextField
-                className={classes.input__password}
-                disabled
-                defaultValue={arrMainAccount[0].email}
-                variant="outlined"
-                size="small"
-              />
-            </Box>
-            <Box
-              width={400}
-              pt={3}
-              display="flex"
-              justifyContent="space-between"
-            >
-              <Typography className={classes.text__info}>Address</Typography>
-              <TextField
-                className={classes.input__password}
-                disabled
-                defaultValue={arrMainAccount[0].address}
-                variant="outlined"
-                size="small"
-              />
-            </Box>
+            <Input
+              container__input={classes.container__input}
+              titleLabel="FirstName"
+              disabled
+              value={arrMainAccount[0].firstname}
+            />
+            <Input
+              container__input={classes.container__input}
+              titleLabel="LastName"
+              disabled
+              value={arrMainAccount[0].lastname}
+            />
+
+            <Input
+              container__input={classes.container__input}
+              titleLabel="Phone"
+              disabled
+              value={arrMainAccount[0].phone}
+            />
+            <Input
+              container__input={classes.container__input}
+              titleLabel="Email"
+              disabled
+              value={arrMainAccount[0].email}
+            />
+            <Input
+              container__input={classes.container__input}
+              titleLabel="Address"
+              disabled
+              value={arrMainAccount[0].address}
+            />
           </Box>
         </AccordionDetails>
       </Accordion>
 
       <Accordion
         className={classes.container__setting}
-        style={{ borderTopWidth: 4, marginTop: 40, borderRadius: 10 }}
-        expanded={state.panel2}
+        style={{ borderRadius: 10 }}
+        expanded={statePanel.panel2}
         onChange={handleChange('panel2')}
       >
         <AccordionSummary
@@ -203,34 +159,24 @@ const SettingPage = (props) => {
           </Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordion__details2}>
-          <Box pt={3} display="flex" justifyContent="space-between">
-            <Typography className={classes.text__info}>
-              New Password <span style={{ color: 'red' }}>*</span>
-            </Typography>
-            <TextField
-              type="password"
-              className={classes.input__password}
-              placeholder="Enter new password"
-              variant="outlined"
-              size="small"
-              value={password.newPassword}
-              onChange={handleChangeNewPassWord}
-            />
-          </Box>
-          <Box pt={3} display="flex" justifyContent="space-between">
-            <Typography className={classes.text__info}>
-              Confirm password <span style={{ color: 'red' }}>*</span>
-            </Typography>
-            <TextField
-              type="password"
-              className={classes.input__password}
-              placeholder="Enter confirm password"
-              variant="outlined"
-              size="small"
-              value={password.confirmPassword}
-              onChange={handleChangeConfirmPassWord}
-            />
-          </Box>
+          <Input
+            container__input={classes.container__input}
+            titleLabel="New Password"
+            type="password"
+            placeholder="Enter new password"
+            value={password.newPassword}
+            onChange={handleChangeNewPassWord}
+            isObligatory
+          />
+          <Input
+            container__input={classes.container__input}
+            titleLabel="Confirm password"
+            type="password"
+            placeholder="Enter confirm password"
+            value={password.confirmPassword}
+            onChange={handleChangeConfirmPassWord}
+            isObligatory
+          />
 
           {password.error ? (
             <Typography

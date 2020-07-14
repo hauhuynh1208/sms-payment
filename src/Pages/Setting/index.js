@@ -63,7 +63,7 @@ class Setting extends React.Component {
           loading={loading}
           editPassword={this.editPassword}
           mainAccount={mainAccount}
-          message={message}
+          // message={message}
         />
       </Layout>
     );

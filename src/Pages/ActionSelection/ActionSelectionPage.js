@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Select,
-  MenuItem,
-} from '@material-ui/core';
+import { Box, Typography, Button } from '@material-ui/core';
+import Input from '../../components/Input';
+import ItemSelection from '../../components/ItemSelection';
 import { history } from '../../utils/history';
 
 import styles from './style';
@@ -19,7 +14,7 @@ const ActionSelectionPage = (props) => {
     data == null ? 'Cash' : data[0].paymentMethod,
   );
   const [valBank, setBank] = React.useState(
-    data == null ? 'ABC' : data[0].bank,
+    data == null ? 'Vietcombank' : data[0].bank,
   );
   const [valStatus, setStatus] = React.useState(
     data == null ? 'Pending' : data[0].status,
@@ -37,219 +32,130 @@ const ActionSelectionPage = (props) => {
 
   const classes = styles();
   return (
-    <Box p={5}>
-      <Box
-        className={classes.container__setting}
-        style={{
-          borderTopWidth: 4,
-          paddingTop: 40,
-          paddingBottom: 40,
-          borderRadius: 10,
-        }}
-      >
-        <Box>
-          <Typography style={{ fontSize: 24, fontWeight: 'bold' }}>
-            {data == null ? 'Create Row Data' : 'Edit Row Data'}
-          </Typography>
-        </Box>
-        <Box display="flex" justifyContent="space-between" flexWrap="wrap">
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>Id</Typography>
-            <TextField
-              className={classes.input__password}
-              placeholder="Enter id"
-              variant="outlined"
-              size="small"
-              value={data == null ? '' : data[0].id}
-            />
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>
-              OrderReference
-            </Typography>
-            <TextField
-              className={classes.input__password}
-              placeholder="Enter OrderReference"
-              variant="outlined"
-              size="small"
-              value={data == null ? '' : data[0].orderReference}
-            />
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>OrderContent</Typography>
-            <TextField
-              className={classes.input__password}
-              placeholder="Enter OrderContent"
-              variant="outlined"
-              size="small"
-              value={data == null ? '' : data[0].orderContent}
-            />
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>Amount</Typography>
-            <TextField
-              className={classes.input__password}
-              placeholder="Enter Amount"
-              variant="outlined"
-              size="small"
-              value={data == null ? '' : data[0].amount}
-            />
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>
-              PaymentMethod
-            </Typography>
-
-            <Select
-              labelId="select-status-label"
-              id="select-status"
-              onChange={handleChangePayment}
-              value={data == null ? '' : valPayment}
-              label="Select from below list"
-              className={classes.select__value}
-            >
-              <MenuItem value="Cash">Cash</MenuItem>
-              <MenuItem value="Bank">Bank</MenuItem>
-              <MenuItem value="Momo">Momo</MenuItem>
-              <MenuItem value="Zalo">Zalo</MenuItem>
-            </Select>
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>Bank</Typography>
-            <Select
-              labelId="select-status-label"
-              id="select-status"
-              onChange={handleChangeBank}
-              value={data == null ? '' : valBank}
-              label="Select from below list"
-              className={classes.select__value}
-            >
-              <MenuItem value="Vietcombank">Vietcombank</MenuItem>
-              <MenuItem value="ACB">ACB</MenuItem>
-              <MenuItem value="Techcombank">Techcombank</MenuItem>
-            </Select>
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>Status</Typography>
-            <Select
-              labelId="select-status-label"
-              id="select-status"
-              onChange={handleChangeStatus}
-              value={data == null ? '' : valStatus}
-              label="Select from below list"
-              className={classes.select__value}
-            >
-              <MenuItem value="Pending">Pending</MenuItem>
-              <MenuItem value="Paid">Paid</MenuItem>
-              <MenuItem value="Canceled">Canceled</MenuItem>
-              <MenuItem value="Refunded">Refunded</MenuItem>
-            </Select>
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>
-              SalesResponsible
-            </Typography>
-            <TextField
-              className={classes.input__password}
-              placeholder="Enter SalesResponsible"
-              variant="outlined"
-              size="small"
-              value={data == null ? '' : data[0].salesResponsible}
-            />
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>ProcessedBy</Typography>
-            <TextField
-              className={classes.input__password}
-              placeholder="Enter ProcessedBy"
-              variant="outlined"
-              size="small"
-              value={data == null ? '' : data[0].processedBy}
-            />
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>Title</Typography>
-            <TextField
-              className={classes.input__password}
-              placeholder="Enter Title"
-              variant="outlined"
-              size="small"
-              value={data == null ? '' : data[0].title}
-            />
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>
-              Customer Name
-            </Typography>
-            <TextField
-              className={classes.input__password}
-              placeholder="Enter Customer Name"
-              variant="outlined"
-              size="small"
-              value={data == null ? '' : data[0].customerName}
-            />
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>Email</Typography>
-            <TextField
-              className={classes.input__password}
-              placeholder="Enter Email"
-              variant="outlined"
-              size="small"
-              value={data == null ? '' : data[0].email}
-            />
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>Phone</Typography>
-            <TextField
-              className={classes.input__password}
-              placeholder="Enter Email"
-              variant="outlined"
-              size="small"
-              value={data == null ? '' : data[0].phone}
-            />
-          </Box>
-          <Box width={400} pt={3}>
-            <Typography className={classes.text__info}>CheckFormat</Typography>
-            <TextField
-              className={classes.input__password}
-              placeholder="Enter CheckFormat"
-              variant="outlined"
-              size="small"
-              value={data == null ? '' : data[0].checkFormat}
-            />
-          </Box>
-        </Box>
-        <Box pt={3} display="flex">
-          {data == null ? (
-            <Button
-              variant="contained"
-              //   size="medium"
-              color="primary"
-              className={classes.btn__change}
-            >
-              Create
-            </Button>
-          ) : (
-            <Button
-              variant="contained"
-              //   size="medium"
-              color="primary"
-              className={classes.btn__change}
-            >
-              Change
-            </Button>
-          )}
+    <Box className={classes.container__setting}>
+      <Typography style={{ fontSize: 24, fontWeight: 'bold' }}>
+        {data == null ? 'Create Row Data' : 'Edit Row Data'}
+      </Typography>
+      <Box display="flex" justifyContent="space-between" flexWrap="wrap">
+        <Input
+          titleLabel="Id"
+          placeholder="Enter id"
+          value={data == null ? '' : data[0].id}
+          input__style={classes.input__style}
+        />
+        <Input
+          titleLabel="OrderReference"
+          placeholder="Enter OrderReference"
+          value={data == null ? '' : data[0].orderReference}
+          input__style={classes.input__style}
+        />
+        <Input
+          titleLabel="OrderContent"
+          placeholder="Enter OrderContent"
+          value={data == null ? '' : data[0].orderContent}
+          input__style={classes.input__style}
+        />
+        <Input
+          titleLabel="Amount"
+          placeholder="Enter Amount"
+          value={data == null ? '' : data[0].amount}
+          input__style={classes.input__style}
+        />
+        <ItemSelection
+          titleLabel="PaymentMethod"
+          onChange={handleChangePayment}
+          value={valPayment}
+          menuItem1="Cash"
+          menuItem2="Bank"
+          menuItem3="Momo"
+          menuItem4="Zalo"
+        />
+        <ItemSelection
+          titleLabel="Bank"
+          onChange={handleChangeBank}
+          value={valBank}
+          menuItem1="Vietcombank"
+          menuItem2="ACB"
+          menuItem3="Techcombank"
+        />
+        <ItemSelection
+          titleLabel="Status"
+          onChange={handleChangeStatus}
+          value={valStatus}
+          menuItem1="Pending"
+          menuItem2="Paid"
+          menuItem3="Canceled"
+          menuItem4="Refunded"
+        />
+        <Input
+          titleLabel="SalesResponsible"
+          placeholder="Enter SalesResponsible"
+          value={data == null ? '' : data[0].salesResponsible}
+          input__style={classes.input__style}
+        />
+        <Input
+          titleLabel="ProcessedBy"
+          placeholder="Enter ProcessedBy"
+          value={data == null ? '' : data[0].processedBy}
+          input__style={classes.input__style}
+        />
+        <Input
+          titleLabel="Title"
+          placeholder="Enter Title"
+          value={data == null ? '' : data[0].title}
+          input__style={classes.input__style}
+        />
+        <Input
+          titleLabel="Customer Name"
+          placeholder="Enter Customer Name"
+          value={data == null ? '' : data[0].customerName}
+          input__style={classes.input__style}
+        />
+        <Input
+          titleLabel="Email"
+          placeholder="Enter Email"
+          value={data == null ? '' : data[0].email}
+          input__style={classes.input__style}
+        />
+        <Input
+          titleLabel="Phone"
+          placeholder="Enter Phone"
+          value={data == null ? '' : data[0].phone}
+          input__style={classes.input__style}
+        />
+        <Input
+          titleLabel="CheckFormat"
+          placeholder="Enter CheckFormat"
+          value={data == null ? '' : data[0].checkFormat}
+          input__style={classes.input__style}
+        />
+      </Box>
+      <Box pt={3} display="flex">
+        {data == null ? (
           <Button
             variant="contained"
-            //   size="medium"
-            color="secondary"
-            className={classes.btn__exit}
-            onClick={() => history.push('/order')}
+            color="primary"
+            className={classes.btn__agree}
           >
-            Exit
+            Create
           </Button>
-        </Box>
+        ) : (
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.btn__agree}
+          >
+            Change
+          </Button>
+        )}
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.btn__exit}
+          onClick={() => history.push('/order')}
+        >
+          Exit
+        </Button>
       </Box>
     </Box>
   );
