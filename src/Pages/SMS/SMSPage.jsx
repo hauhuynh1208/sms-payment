@@ -5,20 +5,22 @@ import {
   Select,
   MenuItem,
   TextField,
+  Typography,
 } from '@material-ui/core';
 import MaterialTable from 'material-table';
+import colors from '../../styles/colors';
 
 const headerStyle = {
   borderWidth: 1,
-  borderColor: '#f2f2f2',
+  borderColor: colors.light2,
   borderStyle: 'solid',
-  backgroundColor: '#00a3a3',
-  color: 'white',
+  backgroundColor: colors.primary,
+  color: colors.white,
 };
 
 const cellStyle = {
   borderWidth: 1,
-  borderColor: '#f2f2f2',
+  borderColor: colors.light2,
   borderStyle: 'solid',
 };
 
@@ -50,13 +52,29 @@ const SMSPage = (props) => {
     {
       title: 'Note',
       field: 'note',
-      editComponent: (props) => (
-        <TextField
-          multiline
-          value={props.value}
-          onChange={(e) => props.onChange(e.target.value)}
-        />
-      ),
+      editComponent: (props) => {
+        return (
+          <TextField
+            multiline
+            value={props.value}
+            onChange={(e) => props.onChange(e.target.value)}
+          />
+        );
+      },
+      render: (rowData) => {
+        console.log(rowData, 'rowdata');
+        let note = rowData.note;
+        if (note) {
+          console.log(note.indexOf(' '), 'log');
+          if (
+            note.length > 20 &&
+            (note.indexOf(' ') > 20 || note.indexOf(' ') < 2)
+          ) {
+            note = rowData.note.slice(0, 20) + '...';
+          }
+        }
+        return <Typography style={{ fontSize: 14 }}>{note}</Typography>;
+      },
     },
   ];
 

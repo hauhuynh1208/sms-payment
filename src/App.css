@@ -68,3 +68,8 @@ body {
 .MuiCheckbox-colorSecondary.Mui-checked {
   color: #f28262 !important;
 }
+.makeStyles-form__control-21 .MuiOutlinedInput-input {
+  padding-left: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}

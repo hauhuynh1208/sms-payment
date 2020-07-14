@@ -9,119 +9,24 @@ import {
   Button,
   Modal,
   Typography,
+  Backdrop,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core';
 import { Publish, GetApp, AddBox } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import colors from '../../styles/colors';
 import { history } from '../../utils/history';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
-  table: {
-    minWidth: 750,
-  },
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
-  },
-
-  ///
-
-  formControl: {
-    minWidth: 250,
-    height: 40,
-    '& > .MuiOutlinedInput-input': {
-      padding: '0px !important',
-      paddingRight: theme.spacing(2),
-    },
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-  button__action: {
-    marginRight: 8,
-    height: 40,
-    backgroundColor: '#00a3a3',
-    color: 'white',
-    boxShadow: 'none',
-    '&:hover': {
-      backgroundColor: '#008282',
-      boxShadow: 'none',
-    },
-  },
-  button__create: {
-    position: 'absolute',
-    left: 0,
-    top: -100,
-  },
-  btn__change: {
-    width: 100,
-    textTransform: 'none',
-    backgroundColor: '#00a3a3',
-    boxShadow: 'none',
-    '&:hover': {
-      backgroundColor: '#008282',
-      boxShadow: 'none',
-    },
-    marginRight: theme.spacing(2),
-  },
-  btn__exit: {
-    width: 100,
-    textTransform: 'none',
-    backgroundColor: '#F28262',
-    boxShadow: 'none',
-    '&:hover': {
-      backgroundColor: '#D97558',
-      boxShadow: 'none',
-    },
-  },
-  modal__container: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text__link: {
-    color: 'white',
-    textDecoration: 'none',
-  },
-  text__linkSelection: {
-    color: 'black',
-    textDecoration: 'none',
-  },
-  link__action: {
-    textDecoration: 'none',
-  },
-  text_modalDelete: {
-    color: '#00a3a3',
-  },
-}));
-
+import styles from './style';
 const headerStyle = {
   borderWidth: 1,
-  borderColor: '#f2f2f2',
+  borderColor: colors.light2,
   borderStyle: 'solid',
-  backgroundColor: '#00a3a3',
-  color: 'white',
+  backgroundColor: colors.primary,
+  color: colors.white,
 };
 
 const cellStyle = {
   borderWidth: 1,
-  borderColor: '#f2f2f2',
+  borderColor: colors.light2,
   borderStyle: 'solid',
 };
 
@@ -194,20 +99,29 @@ const data = [
 ];
 
 const App = (props) => {
-  const classes = useStyles();
-  const [age, setAge] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+  const [action, setAction] = React.useState('');
+  const [time, setTime] = React.useState('');
+  const [openModal, setOpen] = React.useState(false);
   const [dataRow, setDataRow] = React.useState({
     oldDataSelected: [],
     status: '',
   });
+  const handleChangeAction = (event) => {
+    setAction(event.target.value);
+  };
+  const handleChangeTime = (event) => {
+    setTime(event.target.value);
+  };
 
-  const deleteDataRow = () => {
-    if (dataRow.oldDataSelected.length > 0) {
-      setOpen(true);
-    } else {
-      setDataRow({ ...dataRow, status: 'Please select a data row !' });
-    }
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const createDataRow = () => {
+    history.push('/edit-order', {
+      data: null,
+      isCreate: true,
+    });
   };
 
   const editDataRow = () => {
@@ -222,22 +136,18 @@ const App = (props) => {
       setDataRow({ ...dataRow, status: 'Please select data row !' });
     }
   };
-  const createDataRow = () => {
-    history.push('/edit-order', {
-      data: null,
-      isCreate: true,
-    });
-  };
-  const handleClose = () => {
-    setOpen(false);
+
+  const deleteDataRow = () => {
+    if (dataRow.oldDataSelected.length > 0) {
+      setOpen(true);
+    } else {
+      setDataRow({ ...dataRow, status: 'Please select a data row !' });
+    }
   };
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-  console.log(dataRow.status, 'status');
+  const classes = styles();
   return (
-    <Box p={5} style={{ overflowX: 'hidden', scrollbarWidth: 'none' }}>
+    <Box p={5} className={classes.container_order}>
       <Box display="flex" flexDirection="row" justifyContent="space-between">
         <Box pb={1} display="flex" flexDirection="row">
           <Button
@@ -247,10 +157,9 @@ const App = (props) => {
             startIcon={<AddBox />}
             onClick={createDataRow}
           >
-            <Typography className={classes.text__link}>Create</Typography>
+            <Typography>Create</Typography>
           </Button>
-
-          <FormControl variant="outlined" className={classes.formControl}>
+          <FormControl variant="outlined" className={classes.form__control}>
             <InputLabel
               id="demo-simple-select-outlined-label"
               style={{ lineHeight: '4px' }}
@@ -260,8 +169,8 @@ const App = (props) => {
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
-              value={age}
-              onChange={handleChange}
+              value={action}
+              onChange={handleChangeAction}
               label="Action"
               style={{ height: 40 }}
             >
@@ -269,9 +178,7 @@ const App = (props) => {
                 <em>None</em>
               </MenuItem>
               <MenuItem value={1} onClick={editDataRow}>
-                {/* <Typography className={classes.text__linkSelection}> */}
                 Edit order
-                {/* </Typography> */}
               </MenuItem>
               <MenuItem value={2} onClick={deleteDataRow}>
                 Delete order
@@ -298,24 +205,24 @@ const App = (props) => {
           >
             Export
           </Button>
-          <FormControl variant="outlined" className={classes.formControl}>
+          <FormControl variant="outlined" className={classes.form__control}>
             <InputLabel
               id="demo-simple-select-outlined-label"
               style={{ lineHeight: '4px' }}
             >
-              Action
+              Time
             </InputLabel>
             <Select
               labelId="demo-simple-select-outlined-label"
               id="demo-simple-select-outlined"
-              value={age}
-              onChange={handleChange}
-              label="Action"
+              value={time}
+              onChange={handleChangeTime}
+              label="Time"
               style={{ height: 40 }}
             >
-              <MenuItem value={10}>Hiển thị theo ngày</MenuItem>
-              <MenuItem value={20}>Hiển thị theo tuần</MenuItem>
-              <MenuItem value={20}>Hiển thị theo thang</MenuItem>
+              <MenuItem value={1}>Show by date</MenuItem>
+              <MenuItem value={2}>Show by week</MenuItem>
+              <MenuItem value={3}>Show by month</MenuItem>
             </Select>
           </FormControl>
         </Box>
@@ -339,55 +246,38 @@ const App = (props) => {
           pageSize: 10,
           showTextRowsSelected: false,
           rowStyle: (rowData) => ({
-            backgroundColor: rowData.tableData.checked ? '#ebebeb' : '',
+            backgroundColor: rowData.tableData.checked ? colors.light1 : '',
           }),
         }}
         onSelectionChange={(event) => {
           setDataRow({ ...dataRow, oldDataSelected: event, status: '' });
         }}
-        // onRowClick={(event, rowData) => {
-        //   rowData.tableData.checked = !rowData.tableData.checked;
-        // }}
       />
-
       <Modal
-        open={open}
+        open={openModal}
         onClose={handleClose}
         className={classes.modal__container}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
       >
-        <Box
-          style={{
-            position: 'absolute',
-            width: 300,
-            height: 150,
-            backgroundColor: 'white',
-            borderWidth: 0,
-            borderRadius: 20,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-          }}
-        >
-          <Typography className={classes.text_modalDelete}>
+        <Box className={classes.box__deleteRow}>
+          <Typography className={classes.text__modalDelete}>
             Are you sure delete ?
           </Typography>
           <Box pt={2} display="flex">
             <Button
               variant="contained"
-              //   size="medium"
               color="primary"
               onClick={handleClose}
-              className={classes.btn__change}
+              className={classes.btn__delete}
             >
               Delete
             </Button>
-
             <Button
               variant="contained"
-              //   size="medium"
               color="secondary"
               onClick={handleClose}
               className={classes.btn__exit}

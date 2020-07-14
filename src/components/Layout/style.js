@@ -9,7 +9,7 @@ export default makeStyles((theme) => ({
     flexDirection: 'row',
   },
   sideBar__bgImage: {
-    width: 260,
+    width: theme.spacing(32.5),
     height: '100%',
     position: 'absolute',
   },
