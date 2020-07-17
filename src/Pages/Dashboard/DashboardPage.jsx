@@ -105,9 +105,9 @@ const DashboardPage = (props) => {
                 onChange={handleChange}
                 label="Hiển thị doanh số theo"
               >
-                <MenuItem value="d">Hiển thị theo hôm nay</MenuItem>
-                <MenuItem value="w">Hiển thị theo tuần này</MenuItem>
-                <MenuItem value="m">Hiển thị theo tháng này</MenuItem>
+                <MenuItem value="d">Show by date</MenuItem>
+                <MenuItem value="w">Show by week</MenuItem>
+                <MenuItem value="m">Show by month</MenuItem>
               </Select>
             </FormControl>
           </Box>
